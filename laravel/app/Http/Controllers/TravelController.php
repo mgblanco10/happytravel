@@ -150,15 +150,12 @@ public function update(Request $request, $id)
      }
  
     
-    public function search(Request $request)
+     public function search(Request $request): JsonResponse
     {
-    $searchTerm = $request->input('search');
-
-    $travels = Travel::where('name', 'like', '%' . $searchTerm . '%')
-                      ->orWhere('location', 'like', '%' . $searchTerm . '%')
-                      ->get();
-
-    return view('index', compact('travels'));
-}
+        $searchTerm = $request->input('search');
+        $travels = Travel::search($searchTerm);
+        
+        return response()->json($travels);
+    }
 
 }
