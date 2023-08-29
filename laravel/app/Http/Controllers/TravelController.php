@@ -33,15 +33,15 @@ class TravelController extends Controller
         ]); 
 
         
-        $imagePath= null;
+       
 
         $travel = Travel::create([
             'name' => $request->name,
             'location' => $request->location,
-            'image' => $imagePath ?? null,
             'description' => $request->description,
-            'privacy' => 'private',
-            'user_id' => Auth::id()
+            // 'privacy' => 'private',
+            // // 'user_id' => Auth::id()
+           
         ]);
 
         return response()->json(['message' => 'Travel added successfully', 'data' => $travel]);
@@ -87,10 +87,13 @@ class TravelController extends Controller
                 'description' => 'required'
             ]);
     
-            // Lógica para manejar la imagen (si es necesario)
             if ($request->hasFile('image')) {
-                // Aquí puedes implementar la lógica para manejar y guardar la imagen
-                // Puedes utilizar el método store() u otras opciones de Laravel
+                $imagePath = $request->file('image')->store('images', 'public');
+                // Delete the old image file if it exists
+                if ($travel->image) {
+                    Storage::disk('public')->delete($travel->image);
+                }
+                $travel->image = $imagePath;
             }
     
             $travel->update([
