@@ -19,7 +19,7 @@ export default function CardsGuest() {
         {travels.map((travel) => (
     <div className="card" style={{ width: '17rem' }}>
       
-      <img className="card-img-top" src={travel.image} alt="Card" />
+      <img className="card-img-top" src={`http://127.0.0.1:8000/${travel.image}`} alt="Card" />
       <div className="card-body">
         <h5 className="card-title">{travel.name}</h5>
         <p className="card-text">{travel.location}</p>
