@@ -25,4 +25,4 @@ Route::apiResource('happy_travel', TravelController::class);
 // GET All destination http://localhost:8000/api/happy_travel
 // GEL One destination http://localhost:8000/api/happy_travel/{id}
 //PUT edit http://localhost:8000/api/happy_travel/{id} OJO lleva body y headers
-
+// DELETE delete http://localhost:8000/api/happy_travel/{id} (requires headers)

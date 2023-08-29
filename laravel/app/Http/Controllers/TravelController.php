@@ -112,19 +112,18 @@ class TravelController extends Controller
      /**
      * Update the specified resource in destroy.
      */
+
     public function destroy($id): JsonResponse
     {
         try {
-            $travel = $this->findTravelOrFail($id);
+            $travel = Travel::findOrFail($id);
 
             if ($travel->user_id !== Auth::id()) {
                 return response()->json(['success' => false, 'error' => 'No tienes permiso para eliminar este destino.']);
             }
 
-            $imagePath = public_path($travel->image);
-
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
+            if ($travel->image) {
+                Storage::disk('public')->delete($travel->image);
             }
 
             $travel->delete();
@@ -136,6 +135,7 @@ class TravelController extends Controller
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
+
     
 }
 
