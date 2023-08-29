@@ -57,7 +57,16 @@ class TravelController extends Controller
                 'image' => 'required',
                 'description' => 'required'
             ]);
-    
+
+            $imagePath = null;
+     
+            if ($request->hasFile('image')) {
+             $image = $request->file('image');
+             $imageName = time() . '.' . $image->getClientOriginalExtension();
+             $image->move(public_path('images'), $imageName);
+             $imagePath = 'images/' . $imageName;
+            }
+
             // if ($request->hasFile('image')) {
             //     $imagePath = $request->file('image')->store('images', 'public');
             //     // Delete the old image file if it exists
@@ -73,6 +82,11 @@ class TravelController extends Controller
                 'image' =>$request->input('image'),
                 'description' => $request->input('description')
             ]);
+
+            if ($imagePath) {
+                $travel['image'] = $imagePath;
+            }
+
     
             return response()->json(['success' => true, 'message' => '¡Destino actualizado exitosamente!']);
         } catch (ModelNotFoundException $e) {
