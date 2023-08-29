@@ -87,14 +87,17 @@ class TravelController extends Controller
                 'description' => 'required'
             ]);
     
-            // ... (Lógica imagen :S)
-            // FALTA METODO
+            // Lógica para manejar la imagen (si es necesario)
+            if ($request->hasFile('image')) {
+                // Aquí puedes implementar la lógica para manejar y guardar la imagen
+                // Puedes utilizar el método store() u otras opciones de Laravel
+            }
     
-            $travel->name = $request->input('name');
-            $travel->location = $request->input('location');
-            $travel->description = $request->input('description');
-    
-            $travel->save();
+            $travel->update([
+                'name' => $request->input('name'),
+                'location' => $request->input('location'),
+                'description' => $request->input('description')
+            ]);
     
             return response()->json(['success' => true, 'message' => '¡Destino actualizado exitosamente!']);
         } catch (ModelNotFoundException $e) {

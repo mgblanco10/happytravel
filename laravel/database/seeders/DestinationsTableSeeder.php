@@ -16,13 +16,13 @@ class DestinationsTableSeeder extends Seeder
         Travel::create([
             'name' => 'Angkor Wat',
             'location' => 'Camboya',
-            'image' => '/images/angkorwat.jpg',
+            'image' => 'images/angkorwat.jpg',
             'description' => 'Templo hinduista más grande y también el mejor conservado de los que integran el asentamiento de Angkor, Está considerado como la mayor estructura religiosa jamás construida, y uno de los tesoros arqueológicos más importantes del mundo.',
         ]);
         Travel::create([
             'name' => 'Terrazas de arroz Jatiluwih',
             'location' => 'Indonesia',
-            'image' => '/images/bali.jpg',
+            'image' => 'images/bali.jpg',
             'description' => 'Las Terrazas de Arroz de Jatiluwih son un conjunto de campos de arroz que se extienden por las laderas de las montañas en Bali, Indonesia. Estas terrazas son una verdadera maravilla de la ingeniería y la belleza natural, y son una de las atracciones turísticas más populares de la isla.',
         ]);
         Travel::create([
@@ -40,7 +40,7 @@ class DestinationsTableSeeder extends Seeder
         Travel::create([
             'name' => 'Puente del Dragón',
             'location' => 'Vietnam',
-            'image' => '/images/danang.jpg',
+            'image' => 'images/danang.jpg',
             'description' => 'Es un puente figurativo sobre el río Han en Da Nang, Vietnam. La construcción del Puente comenzó en julio de 2009 y se abrió al tráfico en marzo del 2013',
         ]);
         Travel::create([
