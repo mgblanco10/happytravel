@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import axios from '../axios';
 import { useAuth } from '../contexts/AuthContext';
+import NavBar from './NavBar';
 
 export default function DefaultLayout() {
 	const { user, setUser } = useAuth();
@@ -25,7 +26,7 @@ export default function DefaultLayout() {
 
 	// if user is not logged in, redirect to login page
 	if (!user) {
-		return <Navigate to="/" />;
+		return <Navigate to="/login" />;
 	}
 
 	// logout user
@@ -42,8 +43,14 @@ export default function DefaultLayout() {
 	};
 	return (
 		<>
+		<NavBar />
 			<nav>
-				blablabla
+			<a
+									onClick={handleLogout}
+									href="#"
+									>
+									Logout
+								</a>
 			</nav>
 			<main>
                 <Outlet />
