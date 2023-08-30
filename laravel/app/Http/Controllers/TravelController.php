@@ -187,4 +187,3 @@ class TravelController extends Controller
 
     
 }
-

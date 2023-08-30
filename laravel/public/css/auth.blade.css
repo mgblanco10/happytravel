@@ -78,13 +78,7 @@
     align-items: center;
 }
 
-.container-btn{
-    gap: 1rem;
-    padding-top: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 .form-label{
     color: var(--font-color);
