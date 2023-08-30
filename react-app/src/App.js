@@ -1,10 +1,12 @@
 import './App.css';
 import CardsGuest from './components/CardsGuest';
+import NavBar from './components/NavBar/NavBar';
 
 function App() {
   return (
     <div>
-      <CardsGuest />
+      <NavBar />
+      {/* <CardsGuest /> */}
     </div>
   );
 }
