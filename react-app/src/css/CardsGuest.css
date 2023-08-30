@@ -5,6 +5,11 @@
     border-radius: 20px;
 }
 
+.card{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
 .cards {
     margin: 20px;
     padding: 0;
@@ -33,7 +38,7 @@
 
 .card-title {
     font-weight: 700;
-    font-size: 23px;
+    font-size: 20px;
 }
 
 .card-text {
@@ -63,6 +68,29 @@
   }
 
   @media (max-width: 767px) {
+
+    .card{
+        margin: auto;
+        justify-content: center;
+        padding: 5px;
+        display: grid;
+        grid-template-columns: 80%;
+    }
+
+    .cards{
+        margin: 10% 0%;
+        height: 450px;
+    }
+
+    .card-title {
+        font-weight: 700;
+        font-size: 20px;
+    }
+    
+    .card-text {
+        font-size: 18px;
+    }
+
     .card-link {
         display: flex;
         flex-direction: column;
