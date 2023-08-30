@@ -12,6 +12,9 @@ export const Router = createBrowserRouter([
     element: <Navigate to="/" />
   }
 ])
+
+export default router;
+
 /* import { createBrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
 import About from './pages/About';

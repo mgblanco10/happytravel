@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'user']);
 
 Route::apiResource('happy_travel', TravelController::class);
+});
 
 // OJO RUTAS
 // GET All destination http://localhost:8000/api/happy_travel
