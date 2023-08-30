@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+
+:root{
+  --font-color: #0079FF;
+  --green-button: #00DFA2;
+  --pink-button:#FF0060;
+  --background-color: #FBFDCE;
+  --accept-hover:rgb(58, 248, 67);
+  --box-shadow: inset 0px 7px 5px -5px rgba(0, 0, 0, 0.75);
+  --bg-card: rgb(255, 255, 255);
+}
+
+body {
+  font-family: 'Jaldi', sans-serif;
+}
+
+.container-fluid {
+  width: 100%;
+  height: auto;
+  margin-bottom: 100px;
+}
