@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 import axios from '../axios';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -44,7 +43,7 @@ export default function DefaultLayout() {
 	return (
 		<>
 			<nav>
-				
+				blablabla
 			</nav>
 			<main>
                 <Outlet />

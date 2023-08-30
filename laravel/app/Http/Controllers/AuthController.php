@@ -1,72 +1,69 @@
 <?php
+
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use Hash;
-use Session;
+
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-class AuthController extends Controller
-{
-    public function index()
-    {
-        return view('auth.login');
-    }  
-      
-    public function customLogin(Request $request)
-    {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
+class AuthController extends Controller {
+    // register a new user method
+    public function register(RegisterRequest $request) {
+
+        $data = $request->validated();
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
-   
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('happy_travel')
-                        ->withSuccess('Inicio de sesión exitoso');
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        $cookie = cookie('token', $token, 60 * 24); // 1 day
+
+        return response()->json([
+            'user' => new UserResource($user),
+        ])->withCookie($cookie);
+    }
+
+    // login a user method
+    public function login(LoginRequest $request) {
+        $data = $request->validated();
+
+        $user = User::where('email', $data['email'])->first();
+
+        if (!$user || !Hash::check($data['password'], $user->password)) {
+            return response()->json([
+                'message' => 'Email or password is incorrect!'
+            ], 401);
         }
-  
-        return redirect("auth.login")->withSuccess('Los detalles de inicio de sesión no son válidos');
 
-       
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        $cookie = cookie('token', $token, 60 * 24); // 1 day
+
+        return response()->json([
+            'user' => new UserResource($user),
+        ])->withCookie($cookie);
     }
 
-    public function register()
-    {
-        return view('auth.register');
-    }
-      
-    public function customRegister(Request $request)
-    {  
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-        ]);
-           
-        $data = $request->all();
-        $user = $this->create($data);
+    // logout a user method
+    public function logout(Request $request) {
+        $request->user()->currentAccessToken()->delete();
 
-        if ($user) {
-            Auth::login($user);
-            return redirect()->route('happy_travel.index')->withSuccess('Te has registrado exitosamente');
-        } else {
-            return redirect()->route('register')->with('error', 'Hubo un problema al registrarte');
-        }
-    }
-         
-        
+        $cookie = cookie()->forget('token');
 
-    public function create(array $data)
-    {
-      return User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => Hash::make($data['password'])
-      ]);
-    }    
-    
-    public function signOut() {
-        Auth::logout();
-        return redirect()->route('happy_travel.index');
+        return response()->json([
+            'message' => 'Logged out successfully!'
+        ])->withCookie($cookie);
+    }
+
+    // get the authenticated user method
+    public function user(Request $request) {
+        return new UserResource($request->user());
     }
 }

@@ -7,7 +7,7 @@ export default function Profile() {
 		<>
 			<div >User Profile</div>
 				<h5>
-					
+					Name: {user.name}
 				</h5>
 				
 		</>

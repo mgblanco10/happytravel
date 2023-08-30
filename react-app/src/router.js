@@ -1,23 +1,7 @@
-import React from 'react';
-import { Navigate, createBrowserRouter} from 'react-router-dom';
-import App from '../App.js'
-
-export const Router = createBrowserRouter([
-  {
-    path:'/',
-    element: <App />
-  },
-  {
-    path:'*',
-    element: <Navigate to="/" />
-  }
-])
-
-export default router;
-
-/* import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
-import About from './pages/About';
+import Main from './pages/Main';
+import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import ProtectedLayout from './components/ProtectedLayout';
@@ -30,11 +14,15 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <Login />,
+				element: <Main />,
 			},
 			{
 				path: '/register',
 				element: <Register />,
+			},
+			{
+				path: '/login',
+				element: <Login />,
 			},
 		],
 	},
@@ -43,8 +31,8 @@ const router = createBrowserRouter([
 		element: <ProtectedLayout />,
 		children: [
 			{
-				path: '/about',
-				element: <About />,
+				path: '/dashboard',
+				element: <Dashboard />,
 			},
 			{
 				path: '/profile',
@@ -54,4 +42,4 @@ const router = createBrowserRouter([
 	},
 ]);
 
-export default router; */
+export default router; 
