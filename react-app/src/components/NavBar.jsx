@@ -48,7 +48,7 @@ const NavBar = () => {
           </form>
         </div>
         <div className="navbar-icons">
-          <Link to="/happy_travel/index" className="nav-link">
+          <Link to="/" className="nav-link">
             <img className="icon-nav" src={homeIcon} alt="icono home" />
           </Link>
 
@@ -91,12 +91,12 @@ const NavBar = () => {
           </form>
         </div>
         <div className="navbar-icons">
-          <Link to="/happy_travel/index" className="nav-link">
+          <Link to="/" className="nav-link">
             <img className="icon-nav" src={homeIcon} alt="icono home" />
           </Link>
           
 
-              <Link to="/happy_travel/create" className="nav-link">
+              <Link to="/create" className="nav-link">
                 <img className="icon-nav" src={createIcon} alt="icono de agregar destino" />
               </Link>
               <Link to="/signout" className="nav-link">
@@ -104,7 +104,7 @@ const NavBar = () => {
               </Link>
             
          
-          <Link to="/register-user" className="nav-link">
+          <Link to="/profile" className="nav-link">
             <img className="icon-nav" src={avatarIcon} alt="icono perfil" />
           </Link>
         </div>
