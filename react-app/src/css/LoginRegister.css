@@ -8,6 +8,8 @@ label[for="password"] {
   margin-left: 0.5rem;
 }
 
+
+
 .auth-form-container, .login-form, .register-form {
     font-family: 'Jaldi', sans-serif;
     display: flex;
