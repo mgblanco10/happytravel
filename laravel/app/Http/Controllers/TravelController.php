@@ -23,38 +23,14 @@ class TravelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request): JsonResponse
-    // {
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'location' => 'required',
-    //         // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    //         'description' => 'required'
-    //     ]); 
-
-        
-    //     $travel = Travel::create(
-    //         $request->all()
-    //         // 'name' => $request->name,
-    //         // 'location' => $request->location,
-    //         // 'description' => $request->description,
-    //         // 'privacy' => 'private'
-    //         // // 'user_id' => Auth::id()
-
-           
-    //     );
-
-    //     return response()->json(['message' => 'Travel added successfully', 'data' => $travel]);
-    // }
     public function store(Request $request): JsonResponse
     {
         try {
-            // $travel = Travel::findOrFail($id);
     
             $request->validate([
                 'name' => 'required',
                 'location' => 'required',
-                'image' => 'nullable',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
                 'description' => 'required'
             ]);
 
@@ -66,27 +42,13 @@ class TravelController extends Controller
                 $image->move(public_path('images'), $imageName);
                 $imagePath = 'images/' . $imageName;
             }
-
-            // if ($request->hasFile('image')) {
-            //     $imagePath = $request->file('image')->store('images', 'public');
-            //     // Delete the old image file if it exists
-            //     if ($travel->image) {
-            //         Storage::disk('public')->delete($travel->image);
-            //     }
-            //     $travel->image = $imagePath;
-            // }
     
             $travel = Travel::create([
                 'name' => $request->input('name'),
                 'location' => $request->input('location'),
-                'image' =>$request->input('image'),
+                'image' =>$imagePath,
                 'description' => $request->input('description')
             ]);
-
-            if ($imagePath) {
-                $travel['image'] = $imagePath;
-            }
-
     
             return response()->json(['success' => true, 'message' => '¡Destino actualizado exitosamente!']);
         } catch (ModelNotFoundException $e) {

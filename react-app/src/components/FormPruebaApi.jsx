@@ -9,21 +9,23 @@ const FormPruebaApi = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formData = new FormData();
     formData.append('name', name);
     formData.append('location', location);
     formData.append('image', image);
     formData.append('description', description);
-
+  
     try {
       const response = await axios.post('http://localhost:8000/api/happy_travel', formData, {
+        withCredentials: true,
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data", // Usar 'multipart/form-data' para enviar archivos
+          "Accept": "application/json",
         },
       });
       console.log('Response:', response.data);
-
+  
       setName('');
       setLocation('');
       setDescription('');
