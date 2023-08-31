@@ -13,7 +13,7 @@
 .cards {
     margin: 20px;
     padding: 0;
-    background-color: var(--background-color);
+    background-color: var(--background-color,  #FBFDCE);
     border: none;
     border-radius: 20px;
     color: var(--font-color);
@@ -26,14 +26,13 @@
 
 .card-body h5, p{
     margin: 0%;
-    padding: 7px 5px;
 }
 
 .card-title,
 .card-text {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: nowrap; 
 }
 
 .card-title {
@@ -43,6 +42,7 @@
 
 .card-text {
     font-size: 20px;
+   
 }
 
 .card-link {
@@ -65,6 +65,19 @@
   .desktop{
     position:absolute;
     left: 155px;
+  }
+
+  .card-edit img, .card-delete img{
+    width: 30px;
+    padding: 5px;
+  }
+
+  .date-cards{
+    margin: auto;
+    margin-top: 12px;
+    display:flex;
+    width: 95%;
+    justify-content: space-between;
   }
 
   @media (max-width: 767px) {

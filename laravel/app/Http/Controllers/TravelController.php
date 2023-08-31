@@ -185,5 +185,11 @@ class TravelController extends Controller
         }
     }
 
+    public function search(Request $request)
+{
+   $travels = Travel::search($request->search);
+//    return view('destinations', ['destinations' => $destinations]);
+   return response()->json($travels);
+}
     
 }

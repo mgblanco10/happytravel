@@ -1,22 +1,44 @@
-import React, { useState } from "react";
-export default function Login (props) {
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
+import React from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import axios from '../axios';
+import { useAuth } from '../contexts/AuthContext';
+import "../css/LoginRegister.css";
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(email);
-    }
+export default function Login () {
+    const { setUser, csrfToken } = useAuth();
+	const [error, setError] = React.useState(null);
+
+    const handleSubmit = async (e) => {
+		e.preventDefault();
+		const { email, password } = e.target.elements;
+		const body = {
+			email: email.value,
+			password: password.value,
+		};
+		await csrfToken();
+		try {
+			const resp = await axios.post('/login', body);
+			if (resp.status === 200) {
+				setUser(resp.data.user);
+				return <Navigate to="/dashboard" />;
+			}
+		} catch (error) {
+			if (error.response.status === 401) {
+				setError(error.response.data.message);
+			}
+		}
+	};
 
     return (
         <div className="auth-form-container">
-            <form className="login-form" onSubmit={handleSubmit}>
+            <div>{error}</div>
+            <form className="login-form" onSubmit={handleSubmit} method="POST" action="#">
                 <h2>Acceso de Usuario</h2>
                 <hr className="divider" />
                 <label htmlFor="email">E-mail</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="Escribe tu correo..." id="email" className="form-auth" name="email" />
+                <input type="email" placeholder="Escribe tu correo..." id="email" className="form-auth" name="email" />
                 <label htmlFor="password">Contraseña</label>
-                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="Escribe tu contraseña..." id="password" className="form-auth" name="password" />
+                <input  type="password" placeholder="Escribe tu contraseña..." id="password" className="form-auth" name="password" />
                 <div className="container-btn">
                 <button type="submit" className="btn btn-primary">Aceptar</button>
                 <button type="submit" className="btn btn-secondary">Cancelar</button>
