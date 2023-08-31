@@ -146,7 +146,7 @@ button {
 }
 
 
-:root{
+/* :root{
   --font-color: #0079FF;
   --green-button: #00DFA2;
   --pink-button:#FF0060;
@@ -154,7 +154,7 @@ button {
   --accept-hover:rgb(58, 248, 67);
   --box-shadow: inset 0px 7px 5px -5px rgba(0, 0, 0, 0.75);
   --bg-card: rgb(255, 255, 255);
-}
+} */
 
 body {
   font-family: 'Jaldi', sans-serif;
