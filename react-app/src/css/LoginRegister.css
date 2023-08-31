@@ -11,14 +11,14 @@ label[for="password"] {
 .auth-form-container, .login-form, .register-form {
     font-family: 'Jaldi', sans-serif;
     display: flex;
+    justify-content: center;
     flex-direction: column;
+    align-items: center;
     padding: 2rem;
     padding-bottom: 5rem;
     border-radius: 2rem;
     margin: 0.5rem 0 -10px;
     border: 4px solid var(--yellow-light, #FBFDCE);
-    
-   
   }
   
   .auth-form-container h2 {
@@ -45,6 +45,7 @@ label[for="password"] {
     height: 1.5rem;
     padding: 0.5rem;
     font-size: 0.8rem;
+    height: 40px;
     
   }
   
@@ -110,7 +111,6 @@ label[for="password"] {
     }
   
   
-  
   label {
     text-align: left;
     padding: 0.25rem 0;
@@ -130,6 +130,10 @@ label[for="password"] {
     border-radius: 10px;
     cursor: pointer;
     color: #7439db;
+  }
+  .register-form{
+    width: 370px;
+    height: 487px;
   }
   
   @media (max-width: 480px) {

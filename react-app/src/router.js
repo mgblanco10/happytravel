@@ -50,7 +50,7 @@ const router = createBrowserRouter([
 				element: <CreateForm/>,
 			},
 			{
-				path: '/details',
+				path: '/details/:id',
 				element: <Details />,
 			},
 		],
