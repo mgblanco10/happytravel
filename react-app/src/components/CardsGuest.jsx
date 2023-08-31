@@ -5,6 +5,7 @@ import "../css/CardsGuest.css";
 
 import editIcon from '../assets/edit-icon.svg';
 import deleteIcon from '../assets/delete-icon.svg';
+import infoIcon from '../assets/Info.svg';
 
 export default function CardsGuest() {
   const [travels, setTravels] = useState([]);
@@ -27,7 +28,11 @@ export default function CardsGuest() {
     <div>
       <div className="card">
         {travels.map((travel) => (
+          
           <div className="cards" style={{ width: '18.75rem', height: '25rem' }}>
+            <Link to={`/details/${travel.id}`} class="card-link"> 
+              <img class="icon-info" src={infoIcon} alt="icono info"/>
+            </Link>
             <img className="card-img-top" src={`http://127.0.0.1:8000/${travel.image}`} alt="Card" />
             <div className='date-cards'>
               <div className="card-body">
