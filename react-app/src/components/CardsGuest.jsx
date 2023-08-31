@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchCards } from '../services/ApiGetArray';
+import "../css/CardsGuest.css";
 
 
 export default function CardsGuest() {
@@ -15,9 +16,9 @@ export default function CardsGuest() {
   }, []);
   return (
     <div>
-      <div className="cards">
+      <div className="card">
         {travels.map((travel) => (
-    <div className="card" style={{ width: '17rem' }}>
+    <div className="cards" style={{ width: '18.75rem', height:'25rem' }}>
       
       <img className="card-img-top" src={`http://127.0.0.1:8000/${travel.image}`} alt="Card" />
       <div className="card-body">

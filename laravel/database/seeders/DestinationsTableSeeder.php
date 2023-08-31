@@ -23,7 +23,7 @@ class DestinationsTableSeeder extends Seeder
             'name' => 'Terrazas de arroz Jatiluwih',
             'location' => 'Indonesia',
             'image' => 'images/bali.jpg',
-            'description' => 'Las Terrazas de Arroz de Jatiluwih son un conjunto de campos de arroz que se extienden por las laderas de las montañas en Bali, Indonesia. Estas terrazas son una verdadera maravilla de la ingeniería y la belleza natural, y son una de las atracciones turísticas más populares de la isla.',
+            'description' => 'Las Terrazas de Arroz de Jatiluwih son un conjunto de campos de arroz que se extienden por las laderas de las montañas en Bali, Indonesia. Estas terrazas son una verdadera maravilla de la ingeniería y la belleza natural.',
         ]);
         Travel::create([
             'name' => 'Bangkok',
