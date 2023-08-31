@@ -1,0 +1,150 @@
+.full-container-form{
+    border: 5px solid var(--background-color);
+    padding: 20px;
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 40%;
+    color: var(--font-color);
+}
+
+h3{
+    font-weight: 700;
+    display: flex;
+    margin: center;
+    justify-content: center;
+    padding-bottom: 10px;
+    color: var(--pink-button);   
+    font-size:25px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 15.625rem;
+    height: 2.5rem;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.box-line{
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid var(--pink-button);
+    color: var(--pink-button);
+}
+  
+.btn-primary {
+    color:var(--bg-card);
+    background: var(--green-button);
+    width: 7rem; 
+    height: 1.8rem;
+    text-align: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    padding: 1rem 2rem; 
+    font-size: 0.8rem;
+   border-radius: 24px;
+}
+  
+.btn-secondary {
+    background-color: var(--pink-button);
+    border: none;
+    width: 7rem; 
+    height: 1.8rem;
+    text-align: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem; 
+    font-size: 0.8rem;
+    border-radius: 24px;
+}
+
+.columna1, .columna2{
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.form-create{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 5%;
+}
+
+.label-and-input-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.blue-background{
+    background-color: var(--background-color);
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+    width: 100%;
+}
+
+.form-create .form-label{
+    margin: auto;
+    margin-bottom: 0%;
+}
+
+.form-create .columna1 label, .form-create .columna2 label, .box-line{
+    font-weight: 700;
+}
+
+.form-control{
+ width: 100%;
+ margin: auto;
+ border: none;
+ border-radius: 20px;
+ box-shadow: var(--box-shadow);
+ color: var(--font-color);
+ background-color: var(--background-color);
+}
+.form-control::placeholder{
+    color: var(--font-color);
+}
+
+
+
+.custom-textarea{
+    width: 100%;
+    height: 350px;
+    box-shadow: var(--box-shadow);
+    background-color: var(--background-color);
+    padding: 12px;
+    border-radius: 24px;
+}
+
+.custom-textarea::placeholder{
+    color: var(--font-color);
+}
+
+
+.btn-primary:hover{
+    background: var(--accept-hover); 
+}
+.btn-secondary:hover{
+    background-color: var(--font-color);
+}
+
+.add-file .input-group .input-group-text {
+    cursor: pointer;
+    position: relative;
+}
+
+.add-file .input-group img {
+    position: absolute;
+    top: 6px;
+    left: 14px;
+}
+
+.img-add{
+    background-color: var(--font-color);
+}
+
