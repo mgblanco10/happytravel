@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../css/LoginRegister.css";
 export default function Login (props) {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
