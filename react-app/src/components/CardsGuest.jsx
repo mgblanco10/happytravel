@@ -6,7 +6,7 @@ import "../css/CardsGuest.css";
 import editIcon from '../assets/edit-icon.svg';
 import deleteIcon from '../assets/delete-icon.svg';
 
-export default function CardsGuest() {
+export default function CardsGuest( { searchResults } ) {
   const [travels, setTravels] = useState([]);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
@@ -23,10 +23,13 @@ export default function CardsGuest() {
     setIsUserLoggedIn(false);
   }, []);
 
+  const filteredTravels = searchResults ? travels.filter((travel) =>
+  travel.name.toLowerCase().includes(searchResults.toLowerCase())) : travels
+
   return (
     <div>
       <div className="card">
-        {travels.map((travel) => (
+        {filteredTravels.map((travel) => (
           <div className="cards" style={{ width: '18.75rem', height: '25rem' }}>
             <img className="card-img-top" src={`http://127.0.0.1:8000/${travel.image}`} alt="Card" />
             <div className='date-cards'>
