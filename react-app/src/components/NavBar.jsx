@@ -55,13 +55,13 @@ const NavBar = () => {
               <Link to="/happy_travel/create" className="nav-link">
                 <img className="icon-nav" src={createIcon} alt="icono de agregar destino" />
               </Link>
-              <Link to="/signout" className="nav-link">
+              <Link to="/" className="nav-link">
                 <img className="icon-nav" src={logoutIcon} alt="icono de cerrar sesión" />
               </Link>
             </>
           )}
 
-          <Link to="/register-user" className="nav-link">
+          <Link to="/register" className="nav-link">
             <img className="icon-nav" src={avatarIcon} alt="icono perfil" />
           </Link>
         </div>

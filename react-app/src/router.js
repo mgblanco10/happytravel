@@ -6,6 +6,9 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import ProtectedLayout from './components/ProtectedLayout';
 import GuestLayout from './components/GuestLayout';
+import EditForm from './pages/EditForm';
+import CreateForm from './pages/CreateForm';
+import Details from './pages/Details';
 
 const router = createBrowserRouter([
 	{
@@ -37,6 +40,18 @@ const router = createBrowserRouter([
 			{
 				path: '/profile',
 				element: <Profile />,
+			},
+			{
+				path: '/edit',
+				element: <EditForm />,
+			},
+			{
+				path: '/create',
+				element: <CreateForm/>,
+			},
+			{
+				path: '/details',
+				element: <Details />,
 			},
 		],
 	},

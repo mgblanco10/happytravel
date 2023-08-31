@@ -11,11 +11,6 @@ export default function Register() {
 	const [passwordError, setPasswordError] = React.useState('');
 	const navigate = useNavigate();
 
-	useEffect(() => {
-        // Set the CSRF token for Axios requests
-        axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    }, []);
-
 	// register user
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -29,7 +24,7 @@ export default function Register() {
 			const resp = await axios.post('/register', body);
 			if (resp.status === 200) {
 				setUser(resp.data.user);
-				navigate('/profile'); 
+				navigate('/dashboard'); 
 			}
 		} catch (error) {
 			if (error.response.status === 422) {
