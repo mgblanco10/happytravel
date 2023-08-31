@@ -15,13 +15,13 @@ export default function CreateForm() {
                 <div className="columna1">
                     <div className="label-and-input-container">
                     <label htmlFor="title">Título</label>
-                    <input id="title" className="form-control" placeholder="Escribe el título..." />
+                    <input id="title" className="form-control-input" placeholder="Escribe el título..." />
                     <p id="error-title" className="error"></p>
                     </div>
 
                     <div className="label-and-input-container">
                     <label htmlFor="location">Ubicación</label>
-                    <input id="location" className="form-control" type="text" name="location" placeholder="Escribe la ubicación..." />
+                    <input id="location" className="form-control-input" type="text" name="location" placeholder="Escribe la ubicación..." />
                     <p id="error-location" className="error"></p>
                     </div>
 
@@ -29,10 +29,12 @@ export default function CreateForm() {
                         <label className="form-label">Imagen</label>
                         <div className="input-group">
                             <label className="input-group-text" htmlFor="fileInput">
-                                <img className={folderImg}  alt="Icono de carpeta"  />
+                                <img src={folderImg}  alt="Icono de carpeta"  />
                                 <input type="text" className="blue-background" placeholder="Sube una imagen" readOnly />
+                                <input type="text" className="form-control-input" placeholder="Sube una imagen" readOnly />
                             </label>
                         </div>
+                        
                         <p id="error-image" className="error"></p>
                     </div>
 

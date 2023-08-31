@@ -66,7 +66,7 @@ h3{
 .columna1, .columna2{
     padding: 1.5rem;
     width: 58%;
-    height: 20rem;
+    height: 23rem;
 }
 
 .form-create{
@@ -82,10 +82,10 @@ h3{
 }
 
 .blue-background{
-    background-color: var(--background-color);
-    border-radius: 20px;
+    background-color: var(--font-color);
+    border-radius: 20px 0px 0px 20px;
     box-shadow: var(--box-shadow);
-    width: 100%;
+    width: 20%;
 }
 
 .form-create .form-label{
@@ -97,7 +97,7 @@ h3{
     font-weight: 700;
 }
 
-.form-control{
+.form-control-input{
  width: 100%;
  margin: auto;
  border: none;
@@ -106,7 +106,8 @@ h3{
  color: var(--font-color);
  background-color: var(--background-color);
 }
-.form-control::placeholder{
+
+.form-control-input::placeholder{
     color: var(--font-color);
 }
 
