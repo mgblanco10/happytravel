@@ -54,17 +54,17 @@ class TravelController extends Controller
             $request->validate([
                 'name' => 'required',
                 'location' => 'required',
-                'image' => 'required',
+                'image' => 'nullable',
                 'description' => 'required'
             ]);
 
             $imagePath = null;
      
             if ($request->hasFile('image')) {
-             $image = $request->file('image');
-             $imageName = time() . '.' . $image->getClientOriginalExtension();
-             $image->move(public_path('images'), $imageName);
-             $imagePath = 'images/' . $imageName;
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $imageName);
+                $imagePath = 'images/' . $imageName;
             }
 
             // if ($request->hasFile('image')) {
