@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from '../axios';
+import "../css/LoginRegister.css";
 import { useAuth } from '../contexts/AuthContext';
 import {  useNavigate } from 'react-router-dom';
 
@@ -9,11 +10,6 @@ export default function Register() {
 	const [emailError, setEmailError] = React.useState('');
 	const [passwordError, setPasswordError] = React.useState('');
 	const navigate = useNavigate();
-
-	useEffect(() => {
-        // Set the CSRF token for Axios requests
-        axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    }, []);
 
 	// register user
 	const handleSubmit = async (e) => {
@@ -28,7 +24,7 @@ export default function Register() {
 			const resp = await axios.post('/register', body);
 			if (resp.status === 200) {
 				setUser(resp.data.user);
-				navigate('/profile'); 
+				navigate('/dashboard'); 
 			}
 		} catch (error) {
 			if (error.response.status === 422) {

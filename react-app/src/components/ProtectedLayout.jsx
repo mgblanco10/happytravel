@@ -45,12 +45,10 @@ export default function DefaultLayout() {
 		<>
 		<NavBar />
 			<nav>
-			<a
-									onClick={handleLogout}
-									href="#"
-									>
-									Logout
-								</a>
+			<a onClick={handleLogout} href="#">
+				Logout
+			</a>
+										
 			</nav>
 			<main>
                 <Outlet />
