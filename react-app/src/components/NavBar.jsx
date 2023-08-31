@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../css/NavBar.css";
 
+
 import logoImage from '../assets/logo.svg';
 import glassIcon from '../assets/glass-icon.svg';
 import avatarIcon from '../assets/avatar-icon.svg';
@@ -12,12 +13,21 @@ import { useAuth } from '../contexts/AuthContext';
 
 const NavBar = () => {
   const [searchValue, setSearchValue] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
   const [isUserRegistered, setIsUserRegistered] = useState(false);
   const { user, setUser } = useAuth();
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
+    try {
+      const response = await fetch(`/api/search?search=${searchValue}`);
+      const data = await response.json();
+      setSearchResults(data);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+    }
   };
+
   if (!user) {
     return (
     <nav>
@@ -110,9 +120,20 @@ const NavBar = () => {
         </div>
       </div>
     </nav>
+    
   );
 };
+<div className="search-results">
+        {searchResults.map((result) => (
+          <div key={result.id} className="search-result">
+            <h3>{result.title}</h3>
+            <p>{result.location}</p>
+          </div>
+        ))}
+      </div>
 };
+  
+    
 
 
 export default NavBar;
