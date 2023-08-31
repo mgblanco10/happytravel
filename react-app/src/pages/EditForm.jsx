@@ -36,10 +36,6 @@ export default function EditForm() {
                         <p id="error-image" className="error"></p>
                     </div>
 
-                    <div className="btn-container">
-                    <button className="btn-primary" type="submit">Aceptar</button>
-                    <button className="btn-secondary"> Cancelar</button>
-                </div>
                 </div>
 
                
@@ -48,10 +44,12 @@ export default function EditForm() {
                     <p id="error-description" className="error"></p>
                     <textarea name="description"  className="custom-textarea" id="description"placeholder="Cuéntanos por qué te gusta este destino"></textarea>
                 </div>
-                
 
-             
-
+            
+            </div>
+            <div className="btn-container">
+                <button className="btn-primary" type="submit">Aceptar</button>
+                <button className="btn-secondary"> Cancelar</button>
             </div>
 
         </form>
