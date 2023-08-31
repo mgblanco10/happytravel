@@ -51,6 +51,13 @@ export default function DefaultLayout() {
 									>
 									Logout
 								</a>
+								<a
+									
+									href="/create"
+									>
+									Add new
+								</a>
+								
 			</nav>
 			<main>
                 <Outlet />
