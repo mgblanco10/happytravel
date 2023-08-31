@@ -147,6 +147,8 @@ h3{
 .img-add{
     background-color: var(--font-color);
 }
+
+
 @media (max-width: 768px) {
     .full-container-form {
         width: 90%;
@@ -165,7 +167,6 @@ h3{
         padding: 1rem;
     }
 
-
-
-
 }
+
+
