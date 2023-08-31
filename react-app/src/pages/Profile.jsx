@@ -3,7 +3,6 @@ import { useAuth } from '../contexts/AuthContext';
 
 export default function Profile() {
 	const { user } = useAuth();
-	
 	return (
 		<>
 			<div >User Profile</div>
