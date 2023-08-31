@@ -1,6 +1,6 @@
 .full-container-form{
     border: 5px solid var(--background-color);
-    padding: 20px;
+    padding: 1.25rem;
     border-radius: 20px;
     margin: auto;
     margin-top: 5%;
@@ -14,7 +14,7 @@ h3{
     display: flex;
     margin: center;
     justify-content: center;
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
     color: var(--pink-button);   
     font-size:25px;
 }
@@ -23,10 +23,9 @@ h3{
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    width: 15.625rem;
-    height: 2.5rem;
+    width: 19rem;
+    height: 2rem;
     gap: 1rem;
-    margin-top: 2rem;
 }
 
 .box-line{
@@ -65,8 +64,9 @@ h3{
 }
 
 .columna1, .columna2{
-    padding: 10px 20px;
-    width: 100%;
+    padding: 1.5rem;
+    width: 58%;
+    height: 23rem;
 }
 
 .form-create{
@@ -82,10 +82,10 @@ h3{
 }
 
 .blue-background{
-    background-color: var(--background-color);
-    border-radius: 20px;
+    background-color: var(--font-color);
+    border-radius: 20px 0px 0px 20px;
     box-shadow: var(--box-shadow);
-    width: 100%;
+    width: 20%;
 }
 
 .form-create .form-label{
@@ -97,7 +97,7 @@ h3{
     font-weight: 700;
 }
 
-.form-control{
+.form-control-input{
  width: 100%;
  margin: auto;
  border: none;
@@ -106,18 +106,18 @@ h3{
  color: var(--font-color);
  background-color: var(--background-color);
 }
-.form-control::placeholder{
+
+.form-control-input::placeholder{
     color: var(--font-color);
 }
 
 
-
 .custom-textarea{
     width: 100%;
-    height: 350px;
+    height: 17.5rem;
     box-shadow: var(--box-shadow);
     background-color: var(--background-color);
-    padding: 12px;
+    padding: 1rem;
     border-radius: 24px;
 }
 
@@ -140,11 +140,32 @@ h3{
 
 .add-file .input-group img {
     position: absolute;
-    top: 6px;
-    left: 14px;
+    top: 0.3rem;
+    left: 1rem;
 }
 
 .img-add{
     background-color: var(--font-color);
 }
+@media (max-width: 768px) {
+    .full-container-form {
+        width: 90%;
+        margin-bottom: 6rem;
+        
+    }
+   
+    .form-create {
+        flex-direction: column; 
+    }
 
+    .columna1,
+    .columna2 {
+        width: 100%;
+        height: 80%;
+        padding: 1rem;
+    }
+
+
+
+
+}
