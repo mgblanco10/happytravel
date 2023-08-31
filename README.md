@@ -7,11 +7,11 @@
 
 **Proyecto de Mejora del Bootcamp FemCoders - Grupo Contento**
 
-En el marco del bootcamp de desarrollo fullstack de FemCoders, se ha abordado la tarea de optimizar y reestructurar un proyecto previamente creado
-https://github.com/genesis-nf
-https://github.com/florienborg
-https://github.com/CindyLeiva
-https://github.com/mgblanco10
+En el marco del bootcamp de desarrollo fullstack de FemCoders, se ha abordado la tarea de optimizar y reestructurar un proyecto previamente creado por:
+- https://github.com/genesis-nf
+- https://github.com/florienborg
+- https://github.com/CindyLeiva
+- https://github.com/mgblanco10
  <br>Este proyecto original, fue realizado utilizando el patrón Modelo-Vista-Controlador (MVC) en el framework Laravel.
 
 ### Objetivo del Proyecto:
