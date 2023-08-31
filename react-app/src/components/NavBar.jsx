@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../css/NavBar.css";
 
-
 import logoImage from '../assets/logo.svg';
 import glassIcon from '../assets/glass-icon.svg';
 import avatarIcon from '../assets/avatar-icon.svg';
@@ -11,7 +10,7 @@ import logoutIcon from '../assets/logout-icon.svg';
 import homeIcon from '../assets/home-icon.svg';
 import { useAuth } from '../contexts/AuthContext';
 
-const NavBar = () => {
+const NavBar = ({ onLogout }) => {
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isUserRegistered, setIsUserRegistered] = useState(false);
@@ -109,9 +108,9 @@ const NavBar = () => {
               <Link to="/create" className="nav-link">
                 <img className="icon-nav" src={createIcon} alt="icono de agregar destino" />
               </Link>
-              <Link to="/signout" className="nav-link">
+              <a onClick={onLogout} href="#">
                 <img className="icon-nav" src={logoutIcon} alt="icono de cerrar sesión" />
-              </Link>
+              </a>
             
          
           <Link to="/profile" className="nav-link">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchCardDetails } from '../services/ApiGetCardDetails'; // Cambia el nombre de importación
 import { useParams } from 'react-router-dom';
 import editIcon from '../assets/edit-icon.svg';
@@ -34,9 +35,9 @@ export default function Details() {
       <div className="icon-container">
 
           <>
-            <a href={'/edit'}>
+          <Link to={`/edit/${details.id}`}>
               <img className="icon-edit" src={editIcon} alt="icono editar" />
-            </a>
+            </Link>
             {/* <a
               id="deleteLink"
               href="#"

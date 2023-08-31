@@ -43,12 +43,7 @@ export default function DefaultLayout() {
 	};
 	return (
 		<>
-		<NavBar />
-			<nav>
-			<a onClick={handleLogout} href="#">
-				Logout
-			</a>							
-			</nav>
+		<NavBar onLogout={handleLogout}/>
 			<main>
                 <Outlet />
 			</main>
