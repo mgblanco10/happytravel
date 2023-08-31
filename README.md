@@ -1,11 +1,11 @@
-# Equipo 4: Happy Travel 
+# Grupo Bravo: Happy Travel 
 <div align="center">
    <img src="./react-app/src/assets/logo.svg" width="180px">
 </div>
 
-## Transformación de Proyecto Monolítico a Arquitectura de API con Autenticación y CRUD**
+## Transformación de Proyecto Monolítico a Arquitectura de API con Autenticación y CRUD
 
-**Proyecto de Mejora del Bootcamp XYZ - Grupo Bravo**
+**Proyecto de Mejora del Bootcamp FemCoders - Grupo Bravo**
 
 En el marco del bootcamp de desarrollo fullstack de FemCoders, se ha abordado la tarea de optimizar y reestructurar un proyecto previamente creado
 https://github.com/genesis-nf

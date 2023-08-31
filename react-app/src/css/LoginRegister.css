@@ -133,7 +133,7 @@ label[for="password"] {
   }
   .register-form{
     width: 370px;
-    height: 487px;
+    height: 560px;
   }
   
   @media (max-width: 480px) {
