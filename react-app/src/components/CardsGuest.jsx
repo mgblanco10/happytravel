@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { fetchCards } from '../services/ApiGetArray';
 import { Link } from 'react-router-dom';
 import "../css/CardsGuest.css";
-
 import editIcon from '../assets/edit-icon.svg';
 import deleteIcon from '../assets/delete-icon.svg';
 import infoIcon from '../assets/Info.svg';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function CardsGuest() {
   const [travels, setTravels] = useState([]);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const { user, setUser } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,26 +20,24 @@ export default function CardsGuest() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    setIsUserLoggedIn(false);
-  }, []);
-
   return (
     <div>
       <div className="card">
         {travels.map((travel) => (
           
           <div className="cards" style={{ width: '18.75rem', height: '25rem' }}>
-            <Link to={`/details/${travel.id}`} class="card-link"> 
-              <img class="icon-info" src={infoIcon} alt="icono info"/>
-            </Link>
+            {user && (
+                <Link to={`/details/${travel.id}`} class="card-link"> 
+                <img class="icon-info" src={infoIcon} alt="icono info"/>
+              </Link>
+              )}
             <img className="card-img-top" src={`http://127.0.0.1:8000/${travel.image}`} alt="Card" />
             <div className='date-cards'>
               <div className="card-body">
                 <h5 className="card-title">{travel.name}</h5>
                 <p className="card-text">{travel.location}</p>
               </div>
-              {isUserLoggedIn && (
+              {user && (
                 <div>
                   <Link to={`/happy_travel/edit/${travel.id}`} className="card-edit">
                     <img className="icon-cards" src={editIcon} alt="icono de editar destino" />
