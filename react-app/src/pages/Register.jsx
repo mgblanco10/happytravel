@@ -11,7 +11,7 @@ export default function Register() {
 	const [passwordError, setPasswordError] = React.useState('');
 	const navigate = useNavigate();
 
-	// register user
+	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const { name, email, password } = e.target.elements;

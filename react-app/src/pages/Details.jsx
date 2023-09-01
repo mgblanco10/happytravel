@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchCardDetails } from '../services/ApiGetCardDetails'; // Cambia el nombre de importación
+import { fetchCardDetails } from '../services/ApiGetCardDetails'; 
 import { useParams } from 'react-router-dom';
 import editIcon from '../assets/edit-icon.svg';
 import deleteIcon from '../assets/delete-icon.svg';
@@ -38,15 +38,9 @@ export default function Details() {
           <Link to={`/edit/${details.id}`}>
               <img className="icon-edit" src={editIcon} alt="icono editar" />
             </Link>
-            {/* <a
-              id="deleteLink"
-              href="#"
-              data-toggle="modal"
-              data-target="#deleteModal"
-              data-travel-id={travel.id}
-            > */}
+            
               <img className="icon-delete" src={deleteIcon} alt="icono borrar" />
-            {/* </a> */}
+            
           </>
      
       </div>

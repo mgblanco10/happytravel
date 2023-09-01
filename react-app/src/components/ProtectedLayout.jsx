@@ -7,7 +7,7 @@ import NavBar from './NavBar';
 export default function DefaultLayout() {
 	const { user, setUser } = useAuth();
 
-	// check if user is logged in or not from server
+	
 	useEffect(() => {
 		(async () => {
 			try {
@@ -24,12 +24,12 @@ export default function DefaultLayout() {
 		})();
 	}, []);
 
-	// if user is not logged in, redirect to login page
+	
 	if (!user) {
 		return <Navigate to="/login" />;
 	}
 
-	// logout user
+	
 	const handleLogout = async () => {
 		try {
 			const resp = await axios.post('/logout');

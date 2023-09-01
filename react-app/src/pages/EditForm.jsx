@@ -16,11 +16,11 @@ export default function EditForm() {
     const fetchTravelDetails = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/happy_travel/${id}`);
-        const travelDetails = response.data; // Ajusta esto en función de la estructura de tu respuesta
+        const travelDetails = response.data; 
         setName(travelDetails.name);
         setLocation(travelDetails.location);
         setDescription(travelDetails.description);
-        // Si `image` también es un campo editable, establece su valor aquí
+       
       } catch (error) {
         console.error('Error fetching travel details:', error);
       }
@@ -36,7 +36,7 @@ export default function EditForm() {
     formData.append('name', name);
     formData.append('location', location);
     formData.append('description', description);
-    // Si necesitas manejar la imagen, agrega el campo image al formData
+    
 
     try {
       const response = await axios.put(`http://localhost:8000/api/happy_travel/${id}`, formData, {
@@ -48,11 +48,11 @@ export default function EditForm() {
       });
       console.log('Response:', response.data);
 
-      // Restablecer los campos después de la edición exitosa
+    
       setName('');
       setLocation('');
       setDescription('');
-      // Si necesitas restablecer el campo de imagen, agrega el código aquí
+     
     } catch (error) {
       console.error('Error:', error);
     }
@@ -73,7 +73,7 @@ export default function EditForm() {
             <input id="location" className="form-control" type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
             <p id="error-location" className="error"></p>
           </div>
-          {/* Agrega aquí el campo de imagen si es necesario */}
+          
         </div>
         <div className="columna2">
           <label>¿Por qué quieres viajar allí?</label>

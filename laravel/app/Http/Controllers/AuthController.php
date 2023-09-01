@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller {
-    // register a new user method
+    
     public function register(RegisterRequest $request) {
 
         $data = $request->validated();
@@ -23,14 +23,14 @@ class AuthController extends Controller {
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        $cookie = cookie('token', $token, 60 * 24); // 1 day
+        $cookie = cookie('token', $token, 60 * 24); 
 
         return response()->json([
             'user' => new UserResource($user),
         ])->withCookie($cookie);
     }
 
-    // login a user method
+   
     public function login(LoginRequest $request) {
         $data = $request->validated();
 
@@ -44,14 +44,14 @@ class AuthController extends Controller {
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        $cookie = cookie('token', $token, 60 * 24); // 1 day
+        $cookie = cookie('token', $token, 60 * 24); 
 
         return response()->json([
             'user' => new UserResource($user),
         ])->withCookie($cookie);
     }
 
-    // logout a user method
+   
     public function logout(Request $request) {
         $request->user()->currentAccessToken()->delete();
 
@@ -62,7 +62,7 @@ class AuthController extends Controller {
         ])->withCookie($cookie);
     }
 
-    // get the authenticated user method
+    
     public function user(Request $request) {
         return new UserResource($request->user());
     }
