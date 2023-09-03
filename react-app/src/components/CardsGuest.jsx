@@ -25,10 +25,10 @@ export default function CardsGuest() {
       <div className="card">
         {travels.map((travel) => (
           
-          <div className="cards" style={{ width: '18.75rem', height: '25rem' }}>
+          <div  key={travel.id} className="cards" style={{ width: '18.75rem', height: '25rem' }}>
             {user && (
                 <Link to={`/details/${travel.id}`} class="card-link"> 
-                <img class="icon-info" src={infoIcon} alt="icono info"/>
+                <img className="icon-info" src={infoIcon} alt="icono info"/>
               </Link>
               )}
             <img className="card-img-top" src={`http://127.0.0.1:8000/${travel.image}`} alt="Card" />
