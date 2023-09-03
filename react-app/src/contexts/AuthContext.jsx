@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import axios from '../services/axios';
+import axios from '../services/Axios';
 const AuthContent = createContext({
 	user: null,
 	setUser: () => {},

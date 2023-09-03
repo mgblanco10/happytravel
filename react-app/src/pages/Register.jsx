@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from '../services/axios';
+import axios from '../services/Axios';
 import { useAuth } from '../contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
 import "../css/LoginRegister.css";
