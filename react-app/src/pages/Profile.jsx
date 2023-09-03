@@ -5,10 +5,13 @@ export default function Profile() {
 	const { user } = useAuth();
 	return (
 		<>
-			<div >User Profile</div>
-				<h5>
-					
-				</h5>
+			<h2>User Profile</h2>
+				<div>
+				Name: {user.name}
+				</div>
+				<div>
+				Email: {user.email}
+				</div>
 				
 		</>
 	);

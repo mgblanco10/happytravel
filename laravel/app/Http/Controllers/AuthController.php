@@ -30,7 +30,7 @@ class AuthController extends Controller {
         ])->withCookie($cookie);
     }
 
-   
+    
     public function login(LoginRequest $request) {
         $data = $request->validated();
 
@@ -44,14 +44,14 @@ class AuthController extends Controller {
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        $cookie = cookie('token', $token, 60 * 24); 
+        $cookie = cookie('token', $token, 60 * 24); // 1 day
 
         return response()->json([
             'user' => new UserResource($user),
         ])->withCookie($cookie);
     }
 
-   
+    
     public function logout(Request $request) {
         $request->user()->currentAccessToken()->delete();
 
