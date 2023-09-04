@@ -12,6 +12,8 @@ export default function Details() {
   const { id } = useParams();
   const [details, setDetails] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [travels, setTravels] = useState([]);
+  const [deleteId, setDeleteId] = useState(null); 
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -67,8 +67,8 @@
     left: 155px;
   }
 
-  .card-edit img, .card-delete img{
-    width: 30px;
+  .card-edit img{
+    width: 35px;
     padding: 5px;
   }
 
@@ -78,6 +78,14 @@
     display:flex;
     width: 95%;
     justify-content: space-between;
+  }
+  .card-delete-button{
+    background-color: transparent;
+    padding: 5px;
+  }
+  .icon-cards-delete{
+    width: 35px;
+    padding: 5px;
   }
 
   @media (max-width: 767px) {
