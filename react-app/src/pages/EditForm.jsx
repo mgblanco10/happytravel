@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import "../css/CreateForm.css";
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import folderImg from '../assets/file-icon.svg';
 import { useParams } from 'react-router-dom';
+import { fetchCardDetails } from '../services/ApiGetCardDetails'
 
 export default function EditForm() {
   const { id } = useParams();
@@ -13,50 +13,48 @@ export default function EditForm() {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
-    const fetchTravelDetails = async () => {
+    const fetchDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/happy_travel/${id}`);
-        const travelDetails = response.data; 
+        const travelDetails = await fetchCardDetails(id);
         setName(travelDetails.name);
         setLocation(travelDetails.location);
         setDescription(travelDetails.description);
-       
       } catch (error) {
         console.error('Error fetching travel details:', error);
       }
     };
-
-    fetchTravelDetails();
+  
+    fetchDetails();
   }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
 
     const formData = new FormData();
     formData.append('name', name);
     formData.append('location', location);
     formData.append('description', description);
-    
 
-    try {
-      const response = await axios.put(`http://localhost:8000/api/happy_travel/${id}`, formData, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "multipart/form-data", 
-          "Accept": "application/json",
-        },
-      });
-      console.log('Response:', response.data);
+  try {
+    const response = await axios.put(`http://localhost:8000/api/happy_travel/${id}`, formData, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-    
-      setName('');
-      setLocation('');
-      setDescription('');
-     
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+    console.log('Solicitud PUT enviada');
+    console.log('Datos del formulario:', formData);
+    console.log('Respuesta del servidor:', response.data);
+  
+    setName(response.data.name);
+    setLocation(response.data.location);
+    setDescription(response.data.description);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
 
   return (
     <form className="full-container-form" onSubmit={handleSubmit}>
@@ -82,9 +80,9 @@ export default function EditForm() {
         </div>
       </div>
       <div className="btn-container">
-        <Link to="/">
+     
             <button className="btn-primary" type="submit">Aceptar</button>
-        </Link>
+         
         <button className="btn-secondary">Cancelar</button>
       </div>
     </form>

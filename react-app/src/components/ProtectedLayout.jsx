@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import axios from '../services/Axios';
+import axios from '../services/axios';
 import { useAuth } from '../contexts/AuthContext';
 import NavBar from './NavBar';
 
