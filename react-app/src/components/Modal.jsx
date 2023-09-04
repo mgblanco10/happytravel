@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/Modal.css";
 
 const ModalAction = (props) => {
     return (
@@ -16,5 +17,7 @@ const ModalAction = (props) => {
 };
 
 export default ModalAction;
+
+
 
 
