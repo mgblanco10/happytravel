@@ -144,6 +144,7 @@ export default function Details() {
           <Link to={`/edit/${details.id}`}>
             <img className="icon-edit" src={editIcon} alt="icono editar" />
           </Link>
+          
           <img className="icon-delete" src={deleteIcon} alt="icono borrar" onClick={handleDeleteClick} />
         </div>
       </div>
