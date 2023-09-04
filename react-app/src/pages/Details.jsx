@@ -5,10 +5,13 @@ import { useParams } from 'react-router-dom';
 import editIcon from '../assets/edit-icon.svg';
 import deleteIcon from '../assets/delete-icon.svg';
 import "../css/Details.css";
+import ModalAction from '../components/Modal';
+import axios from 'axios';
 
 export default function Details() {
   const { id } = useParams();
   const [details, setDetails] = useState({});
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -18,6 +21,33 @@ export default function Details() {
 
     fetchDetails();
   }, [id]);
+
+  // const handleDeleteClick = () => {
+  //   setIsModalOpen(true);
+  // };
+
+  // const handleCloseModal = () => {
+  //   setIsModalOpen(false);
+  // };
+
+  const handleDelete = async () => {
+    try {
+      console.log('Eliminando elemento con ID:', id);
+
+      await axios.delete(`http://localhost:8000/api/happy_travel/${id}`, {
+        withCredentials: true, 
+      });
+      
+      console.log('Elemento eliminado con éxito');
+  
+    } catch (error) {
+      console.error('Error al eliminar el elemento:', error);
+   
+    // } finally {
+    //   setIsModalOpen(false); 
+    }
+  };
+
 
   return (
 
@@ -32,19 +62,20 @@ export default function Details() {
         </div>
         <p className="travel-description">{details.description}</p>
       </div>
-      <div className="icon-container">
-
-          <>
+      <div className="icon-container"> 
           <Link to={`/edit/${details.id}`}>
               <img className="icon-edit" src={editIcon} alt="icono editar" />
             </Link>
             
-              <img className="icon-delete" src={deleteIcon} alt="icono borrar" />
-            
-          </>
-     
+              <img className="icon-delete" src={deleteIcon} alt="icono borrar" onClick={handleDelete} />
+
       </div>
     </div>
+    {/* <ModalAction
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onDelete={handleDelete}
+      /> */}
   </div>
 
   )

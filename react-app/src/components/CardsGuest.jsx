@@ -27,7 +27,7 @@ export default function CardsGuest() {
           
           <div  key={travel.id} className="cards" style={{ width: '18.75rem', height: '25rem' }}>
             {user && (
-                <Link to={`/details/${travel.id}`} class="card-link"> 
+                <Link to={`/details/${travel.id}`} className="card-link"> 
                 <img className="icon-info" src={infoIcon} alt="icono info"/>
               </Link>
               )}
@@ -39,10 +39,10 @@ export default function CardsGuest() {
               </div>
               {user && (
                 <div>
-                  <Link to={`/happy_travel/edit/${travel.id}`} className="card-edit">
+                  <Link to={`/edit/${travel.id}`} className="card-edit">
                     <img className="icon-cards" src={editIcon} alt="icono de editar destino" />
                   </Link>
-                  <Link to={`/happy_travel/delete/${travel.id}`} className="card-delete">
+                  <Link to={`/delete/${travel.id}`} className="card-delete">
                     <img className="icon-cards" src={deleteIcon} alt="icono de eliminar destino" />
                   </Link>
                 </div>
