@@ -6,7 +6,7 @@ import editIcon from '../assets/edit-icon.svg';
 import deleteIcon from '../assets/delete-icon.svg';
 import "../css/Details.css";
 import ModalAction from '../components/Modal';
-import axios from 'axios';
+import { deleteTravel } from '../services/ApiDeleteTravel'; 
 
 export default function Details() {
   const { id } = useParams();
@@ -32,20 +32,18 @@ export default function Details() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
+      
   const handleDelete = async () => {
     try {
       console.log('Eliminando elemento con ID:', id);
-      await axios.delete(`http://localhost:8000/api/happy_travel/${id}`, {
-        withCredentials: true, 
-      });
-      
+  
+      await deleteTravel(id); 
+  
       console.log('Elemento eliminado con éxito');
-      navigate ('/dashboard');
+      navigate('/dashboard');
   
     } catch (error) {
       console.error('Error al eliminar el elemento:', error);
-   
     }
   };
 

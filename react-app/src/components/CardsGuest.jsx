@@ -6,7 +6,7 @@ import editIcon from '../assets/edit-icon.svg';
 import deleteIcon from '../assets/delete-icon.svg';
 import infoIcon from '../assets/Info.svg';
 import { useAuth } from '../contexts/AuthContext';
-import { deleteCard } from '../services/ApideleteCard'; 
+import { deleteTravel } from '../services/ApiDeleteTravel'; 
 import ModalAction from './Modal'; 
 
 export default function CardsGuest() {
@@ -24,7 +24,7 @@ export default function CardsGuest() {
   }, []);
 
   const handleDelete = async (id) => {
-    const success = await deleteCard(id); 
+    const success = await deleteTravel(id); 
 
     if (success) {
       setTravels((prevTravels) => prevTravels.filter((travel) => travel.id !== id));
