@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "../css/CreateForm.css";
+import { Navigate } from 'react-router-dom';
 
 export default function CreateForm() {
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
+    const [redirectToDashboard, setRedirectToDashboard] = useState(false); 
   
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -31,10 +33,16 @@ export default function CreateForm() {
         setLocation('');
         setDescription('');
         setImage(null);
+        setRedirectToDashboard(true);
+        
       } catch (error) {
         console.error('Error:', error);
       }
     };
+    
+    if (redirectToDashboard) {
+      return <Navigate to="/dashboard" />;
+  }
 
     return (
          <form className="full-container-form" onSubmit={handleSubmit}>

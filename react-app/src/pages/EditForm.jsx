@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "../css/CreateForm.css";
 import axios from 'axios';
 import folderImg from '../assets/file-icon.svg';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate  } from 'react-router-dom';
 import { fetchCardDetails } from '../services/ApiGetCardDetails'
 
 export default function EditForm() {
@@ -11,6 +11,7 @@ export default function EditForm() {
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
+  const [redirectToDashboard, setRedirectToDashboard] = useState(false); 
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -51,10 +52,16 @@ export default function EditForm() {
     setName(response.data.name);
     setLocation(response.data.location);
     setDescription(response.data.description);
+    setRedirectToDashboard(true);
+
   } catch (error) {
     console.error('Error:', error);
   }
 };
+
+if (redirectToDashboard) {
+  return <Navigate to="/dashboard" />;
+}
 
   return (
     <form className="full-container-form" onSubmit={handleSubmit}>

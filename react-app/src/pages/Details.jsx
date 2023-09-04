@@ -11,7 +11,7 @@ import axios from 'axios';
 export default function Details() {
   const { id } = useParams();
   const [details, setDetails] = useState({});
-  // const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -22,13 +22,13 @@ export default function Details() {
     fetchDetails();
   }, [id]);
 
-  // const handleDeleteClick = () => {
-  //   setIsModalOpen(true);
-  // };
+  const handleDeleteClick = () => {
+    setIsModalOpen(true);
+  };
 
-  // const handleCloseModal = () => {
-  //   setIsModalOpen(false);
-  // };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleDelete = async () => {
     try {
@@ -43,8 +43,8 @@ export default function Details() {
     } catch (error) {
       console.error('Error al eliminar el elemento:', error);
    
-    // } finally {
-    //   setIsModalOpen(false); 
+    } finally {
+      setIsModalOpen(false); 
     }
   };
 
@@ -71,11 +71,11 @@ export default function Details() {
 
       </div>
     </div>
-    {/* <ModalAction
+    <ModalAction
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onDelete={handleDelete}
-      /> */}
+      />
   </div>
 
   )
