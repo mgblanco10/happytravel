@@ -6,10 +6,13 @@ import editIcon from '../assets/edit-icon.svg';
 import deleteIcon from '../assets/delete-icon.svg';
 import infoIcon from '../assets/Info.svg';
 import { useAuth } from '../contexts/AuthContext';
+import { deleteTravel } from '../services/ApiDeleteTravel'; 
+import ModalAction from './Modal'; 
 
 export default function CardsGuest() {
   const [travels, setTravels] = useState([]);
   const { user, setUser } = useAuth();
+  const [deleteId, setDeleteId] = useState(null); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,17 +23,34 @@ export default function CardsGuest() {
     fetchData();
   }, []);
 
+  const handleDelete = async (id) => {
+    const success = await deleteTravel(id); 
+
+    if (success) {
+      setTravels((prevTravels) => prevTravels.filter((travel) => travel.id !== id));
+    }
+
+    setDeleteId(null);
+  };
+
+  const openDeleteModal = (id) => {
+    setDeleteId(id);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteId(null);
+  };
+
   return (
     <div>
       <div className="card">
         {travels.map((travel) => (
-          
           <div  key={travel.id} className="cards" style={{ width: '18.75rem', height: '25rem' }}>
             {user && (
-                <Link to={`/details/${travel.id}`} className="card-link"> 
+              <Link to={`/details/${travel.id}`} className="card-link"> 
                 <img className="icon-info" src={infoIcon} alt="icono info"/>
               </Link>
-              )}
+            )}
             <img className="card-img-top" src={`http://127.0.0.1:8000/${travel.image}`} alt="Card" />
             <div className='date-cards'>
               <div className="card-body">
@@ -42,18 +62,24 @@ export default function CardsGuest() {
                   <Link to={`/edit/${travel.id}`} className="card-edit">
                     <img className="icon-cards" src={editIcon} alt="icono de editar destino" />
                   </Link>
-                  <Link to={`/delete/${travel.id}`} className="card-delete">
-                    <img className="icon-cards" src={deleteIcon} alt="icono de eliminar destino" />
-                  </Link>
+                  <button onClick={() => openDeleteModal(travel.id)} className="card-delete-button">
+                    <img className="icon-cards-delete" src={deleteIcon} alt="icono de eliminar destino" />
+                  </button>
                 </div>
               )}
             </div>
           </div>
         ))}
       </div>
+      <ModalAction
+        isOpen={deleteId !== null}
+        onClose={closeDeleteModal}
+        onDelete={() => handleDelete(deleteId)}
+      />
     </div>
   );
 }
+
 
 
 
