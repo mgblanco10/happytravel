@@ -9,6 +9,7 @@ import GuestLayout from '../components/GuestLayout';
 import EditForm from '../pages/EditForm';
 import CreateForm from '../pages/CreateForm';
 import Details from '../pages/Details';
+import Search from '../pages/Search';
 
 const router = createBrowserRouter([
 	{
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
 			{
 				path: '/login',
 				element: <Login />,
+			},
+			{
+				path: '/search',
+				element: <Search />,
 			},
 		],
 	},
@@ -52,6 +57,10 @@ const router = createBrowserRouter([
 			{
 				path: '/details/:id',
 				element: <Details />,
+			},
+			{
+				path: '/search',
+				element: <Search />,
 			},
 		],
 	},

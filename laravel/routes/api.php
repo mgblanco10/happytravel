@@ -30,8 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::apiResource('happy_travel', TravelController::class);
 
-
-
+Route::get('/happy_travel', [TravelController::class, 'search']);
 
 
 

@@ -9,23 +9,36 @@ import createIcon from '../assets/create-icon.svg';
 import logoutIcon from '../assets/logout-icon.svg';
 import homeIcon from '../assets/home-icon.svg';
 import { useAuth } from '../contexts/AuthContext';
+import axios from 'axios';
 
 const NavBar = ({ onLogout }) => {
   const [searchValue, setSearchValue] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState();
   const [isUserRegistered, setIsUserRegistered] = useState(false);
   const { user, setUser } = useAuth();
 
+
   const handleSearch = async (e) => {
     e.preventDefault();
+    console.log(searchValue);
     try {
-      const response = await fetch(`/api/search?search=${searchValue}`);
-      const data = await response.json();
-      setSearchResults(data);
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-    }
+      const response = await axios.get(`http://localhost:8000/api/happy_travel?search=${searchValue}`);
+    const data = response.data;
+    console.log("cindy",data)
+    
+    setSearchResults(data);
+    
+  } catch (error) {
+    console.error("Error fetching search results:", error);
+  }
+  
+  // if (searchValue.trim() === '' || searchResults.length === 0) {
+    //   setSearchResults([]);
+    // }
+    
   };
+  
+  console.log(searchResults);
 
   if (!user) {
     return (
@@ -111,6 +124,18 @@ const NavBar = ({ onLogout }) => {
               <a onClick={onLogout} href="#">
                 <img className="icon-nav" src={logoutIcon} alt="icono de cerrar sesión" />
               </a>
+<div className="search-results">
+  {searchResults && searchResults.length > 0 ? (
+    searchResults.map((result) => (
+      <div key={result.id} className="search-result">
+        <h3>{result.name}</h3>
+        <p>{result.location}</p>
+      </div>
+    ))
+  ) : (
+    <p>No se encontraron resultados.</p>
+  )}
+</div>
             
          
           <Link to="/profile" className="nav-link">
@@ -121,18 +146,12 @@ const NavBar = ({ onLogout }) => {
     </nav>
     
   );
-};
-<div className="search-results">
-        {searchResults.map((result) => (
-          <div key={result.id} className="search-result">
-            <h3>{result.title}</h3>
-            <p>{result.location}</p>
-          </div>
-        ))}
-      </div>
-};
+
   
-    
+}
+
+
+};
 
 
 export default NavBar;

@@ -135,11 +135,50 @@ class TravelController extends Controller
         }
     }
 
-    public function search(Request $request)
-{
-   $travels = Travel::search($request->search);
+//     public function search(Request $request)
+//     {
+//    $travels = Travel::search($request->search);
 
-   return response()->json($travels);
+//    return response()->json($travels);
+//     }
+// public function search(Request $request)
+// {
+//     $searchTerm = $request->input('search');
+
+//     $travels = Travel::search($searchTerm);
+
+//     return response()->json($travels);
+// }
+// public function search(Request $request)
+// {
+//     $searchTerm = $request->input('search');
+
+//     // $travels = Travel::where('title', 'like', '%' . $searchTerm . '%')
+//     //                   ->orWhere('location', 'like', '%' . $searchTerm . '%')
+//     //                   ->get();
+
+//     // $travels = Travel::where(function($query) use ($searchTerm) {
+//     //     $query->where('title', 'like', '%' . $searchTerm . '%')
+//     //           ->orWhere('location', 'like', '%' . $searchTerm . '%');
+//     // })->get();
+
+//     // $travels = Travel::where(function($query) use ($searchTerm) {
+//     //     $query->where('name', 'like', '%' . $searchTerm . '%');
+//     //     $query->orWhere('location', 'like', '%' . $searchTerm . '%');
+//     // })->get();
+
+
+//     // return response()->json($travels);
+// }
+public function search(Request $request)
+{
+    $searchTerm = $request->input('search');
+
+    $travels = Travel::where(function ($query) use ($searchTerm) {
+        $query->where('name', 'like', '%' . $searchTerm . '%')
+              ->orWhere('location', 'like', '%' . $searchTerm . '%');
+    })->get();
+
+    return response()->json($travels);
 }
-    
 }
