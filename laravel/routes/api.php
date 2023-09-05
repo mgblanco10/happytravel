@@ -30,6 +30,25 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::apiResource('happy_travel', TravelController::class);
 
+Route::get('/happy_travel', [TravelController::class, 'search']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // OJO RUTAS
 // GET All destination http://localhost:8000/api/happy_travel

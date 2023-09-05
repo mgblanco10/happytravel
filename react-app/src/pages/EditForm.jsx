@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import "../css/CreateForm.css";
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import folderImg from '../assets/file-icon.svg';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate  } from 'react-router-dom';
+import { fetchCardDetails } from '../services/ApiGetCardDetails'
 
 export default function EditForm() {
   const { id } = useParams();
@@ -11,52 +11,57 @@ export default function EditForm() {
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
+  const [redirectToDashboard, setRedirectToDashboard] = useState(false); 
 
   useEffect(() => {
-    const fetchTravelDetails = async () => {
+    const fetchDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/happy_travel/${id}`);
-        const travelDetails = response.data; // Ajusta esto en función de la estructura de tu respuesta
+        const travelDetails = await fetchCardDetails(id);
         setName(travelDetails.name);
         setLocation(travelDetails.location);
         setDescription(travelDetails.description);
-        // Si `image` también es un campo editable, establece su valor aquí
       } catch (error) {
         console.error('Error fetching travel details:', error);
       }
     };
-
-    fetchTravelDetails();
+  
+    fetchDetails();
   }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
 
     const formData = new FormData();
     formData.append('name', name);
     formData.append('location', location);
     formData.append('description', description);
-    // Si necesitas manejar la imagen, agrega el campo image al formData
 
-    try {
-      const response = await axios.put(`http://localhost:8000/api/happy_travel/${id}`, formData, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "multipart/form-data", 
-          "Accept": "application/json",
-        },
-      });
-      console.log('Response:', response.data);
+  try {
+    const response = await axios.put(`http://localhost:8000/api/happy_travel/${id}`, formData, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-      // Restablecer los campos después de la edición exitosa
-      setName('');
-      setLocation('');
-      setDescription('');
-      // Si necesitas restablecer el campo de imagen, agrega el código aquí
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+    console.log('Solicitud PUT enviada');
+    console.log('Datos del formulario:', formData);
+    console.log('Respuesta del servidor:', response.data);
+  
+    setName(response.data.name);
+    setLocation(response.data.location);
+    setDescription(response.data.description);
+    setRedirectToDashboard(true);
+
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+if (redirectToDashboard) {
+  return <Navigate to="/dashboard" />;
+}
 
   return (
     <form className="full-container-form" onSubmit={handleSubmit}>
@@ -73,7 +78,7 @@ export default function EditForm() {
             <input id="location" className="form-control" type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
             <p id="error-location" className="error"></p>
           </div>
-          {/* Agrega aquí el campo de imagen si es necesario */}
+          
         </div>
         <div className="columna2">
           <label>¿Por qué quieres viajar allí?</label>
@@ -82,9 +87,9 @@ export default function EditForm() {
         </div>
       </div>
       <div className="btn-container">
-        <Link to="/">
+     
             <button className="btn-primary" type="submit">Aceptar</button>
-        </Link>
+         
         <button className="btn-secondary">Cancelar</button>
       </div>
     </form>

@@ -11,18 +11,14 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TravelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
         $travels = Travel::all();
         return response()->json($travels);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request): JsonResponse
     {
         try {
@@ -58,9 +54,7 @@ class TravelController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+  
     public function show($id): JsonResponse
     {
         try {
@@ -71,9 +65,7 @@ class TravelController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit($id): JsonResponse
     {
         try {
@@ -83,9 +75,7 @@ class TravelController extends Controller
             return response()->json(['error' => 'El destino no se encontró.'], 404);
         }
     }
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, $id): JsonResponse
     {
         try {
@@ -100,7 +90,7 @@ class TravelController extends Controller
     
             if ($request->hasFile('image')) {
                 $imagePath = $request->file('image')->store('images', 'public');
-                // Delete the old image file if it exists
+                
                 if ($travel->image) {
                     Storage::disk('public')->delete($travel->image);
                 }
@@ -120,9 +110,7 @@ class TravelController extends Controller
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
-     /**
-     * Update the specified resource in destroy.
-     */
+     
 
     public function destroy($id): JsonResponse
     {
@@ -147,11 +135,50 @@ class TravelController extends Controller
         }
     }
 
-    public function search(Request $request)
+//     public function search(Request $request)
+//     {
+//    $travels = Travel::search($request->search);
+
+//    return response()->json($travels);
+//     }
+// public function search(Request $request)
+// {
+//     $searchTerm = $request->input('search');
+
+//     $travels = Travel::search($searchTerm);
+
+//     return response()->json($travels);
+// }
+// public function search(Request $request)
+// {
+//     $searchTerm = $request->input('search');
+
+//     // $travels = Travel::where('title', 'like', '%' . $searchTerm . '%')
+//     //                   ->orWhere('location', 'like', '%' . $searchTerm . '%')
+//     //                   ->get();
+
+//     // $travels = Travel::where(function($query) use ($searchTerm) {
+//     //     $query->where('title', 'like', '%' . $searchTerm . '%')
+//     //           ->orWhere('location', 'like', '%' . $searchTerm . '%');
+//     // })->get();
+
+//     // $travels = Travel::where(function($query) use ($searchTerm) {
+//     //     $query->where('name', 'like', '%' . $searchTerm . '%');
+//     //     $query->orWhere('location', 'like', '%' . $searchTerm . '%');
+//     // })->get();
+
+
+//     // return response()->json($travels);
+// }
+public function search(Request $request)
 {
-   $travels = Travel::search($request->search);
-//    return view('destinations', ['destinations' => $destinations]);
-   return response()->json($travels);
+    $searchTerm = $request->input('search');
+
+    $travels = Travel::where(function ($query) use ($searchTerm) {
+        $query->where('name', 'like', '%' . $searchTerm . '%')
+              ->orWhere('location', 'like', '%' . $searchTerm . '%');
+    })->get();
+
+    return response()->json($travels);
 }
-    
 }

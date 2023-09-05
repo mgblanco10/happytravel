@@ -45,7 +45,7 @@ label[for="password"] {
     border-radius: 1.25rem;
     width: 18rem;
     height: 1.5rem;
-    padding: 0.5rem;
+    padding: 1rem;
     font-size: 0.8rem;
     height: 40px;
     
@@ -136,6 +136,11 @@ label[for="password"] {
   .register-form{
     width: 370px;
     height: 560px;
+  }
+
+  p{
+    color: var(--pink-button);
+    font-size: 14px;
   }
   
   @media (max-width: 480px) {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext'; 
 import "../css/NavBar.css";
 
 import logoImage from '../assets/logo.svg';
@@ -8,23 +9,14 @@ import avatarIcon from '../assets/avatar-icon.svg';
 import createIcon from '../assets/create-icon.svg';
 import logoutIcon from '../assets/logout-icon.svg';
 import homeIcon from '../assets/home-icon.svg';
-import { useAuth } from '../contexts/AuthContext';
 
 const NavBar = ({ onLogout }) => {
   const [searchValue, setSearchValue] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [isUserRegistered, setIsUserRegistered] = useState(false);
   const { user, setUser } = useAuth();
 
-  const handleSearch = async (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch(`/api/search?search=${searchValue}`);
-      const data = await response.json();
-      setSearchResults(data);
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-    }
+    window.location.href = `/search?query=${searchValue}`;
   };
 
   if (!user) {
@@ -103,36 +95,23 @@ const NavBar = ({ onLogout }) => {
           <Link to="/" className="nav-link">
             <img className="icon-nav" src={homeIcon} alt="icono home" />
           </Link>
-          
-
               <Link to="/create" className="nav-link">
                 <img className="icon-nav" src={createIcon} alt="icono de agregar destino" />
               </Link>
               <a onClick={onLogout} href="#">
                 <img className="icon-nav" src={logoutIcon} alt="icono de cerrar sesión" />
-              </a>
-            
-         
+              </a>    
           <Link to="/profile" className="nav-link">
             <img className="icon-nav" src={avatarIcon} alt="icono perfil" />
           </Link>
         </div>
       </div>
-    </nav>
-    
-  );
+    </nav> 
+  ); 
+}
 };
-<div className="search-results">
-        {searchResults.map((result) => (
-          <div key={result.id} className="search-result">
-            <h3>{result.title}</h3>
-            <p>{result.location}</p>
-          </div>
-        ))}
-      </div>
-};
-  
-    
 
 
 export default NavBar;
+
+  

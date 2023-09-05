@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "../css/CreateForm.css";
-import folderImg from '../assets/file-icon.svg'
+import { Navigate } from 'react-router-dom';
 
 export default function CreateForm() {
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
+    const [redirectToDashboard, setRedirectToDashboard] = useState(false); 
   
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -32,13 +33,18 @@ export default function CreateForm() {
         setLocation('');
         setDescription('');
         setImage(null);
+        setRedirectToDashboard(true);
+        
       } catch (error) {
         console.error('Error:', error);
       }
     };
+    
+    if (redirectToDashboard) {
+      return <Navigate to="/dashboard" />;
+  }
 
     return (
-        // <form className="full-container-form" method="POST" enctype="multipart/form-data">
          <form className="full-container-form" onSubmit={handleSubmit}>
             <input type="hidden" name="_token"/>
 
@@ -48,14 +54,12 @@ export default function CreateForm() {
                 <div className="columna1">
                     <div className="label-and-input-container">
                     <label htmlFor="title">Título</label>
-                    {/* <input id="title" className="form-control-input" placeholder="Escribe el título..." /> */}
                     <input className="form-control-input" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Escribe el título..."/>
                     <p id="error-title" className="error"></p>
                     </div>
 
                     <div className="label-and-input-container">
                     <label htmlFor="location">Ubicación</label>
-                    {/* <input id="location" className="form-control-input" type="text" name="location" placeholder="Escribe la ubicación..." /> */}
                     <input className="form-control-input" type="text" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Escribe la ubicación..."/>
                     <p id="error-location" className="error"></p>
                     </div>
@@ -64,8 +68,7 @@ export default function CreateForm() {
                         <label className="form-label">Imagen</label>
                         <div className="input-group">
                             <label className="input-group-text" htmlFor="fileInput">
-                                <input type="file" className="blue-background d-none" placeholder="Sube una imagen" readOnly />
-                                 <img className="prueba" src={folderImg}  alt="Icono de carpeta"/> 
+                                 <input className="form-control-input" type="file" onChange={(e) => setImage(e.target.files[0])} />
                             </label>
                             <input className="form-control-input"   onChange={(e) => setImage(e.target.files[0])} />
                         </div>
@@ -83,7 +86,6 @@ export default function CreateForm() {
                 <div className="columna2">
                     <label>¿Por qué quieres viajar allí?</label>
                     <p id="error-description" className="error"></p>
-                    {/* <textarea name="description"  className="custom-textarea" id="description" placeholder="Cuéntanos por qué te gusta este destino"></textarea> */}
                     <textarea className="custom-textarea" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Cuéntanos por qué te gusta este destino"/>
                 </div>
                 

@@ -1,14 +1,15 @@
 import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
-import axios from '../axios';
+import { Navigate } from 'react-router-dom';
+import axios from '../services/axios';
 import { useAuth } from '../contexts/AuthContext';
-import "../css/LoginRegister.css";
+import {  useNavigate } from 'react-router-dom';
 
-export default function Login () {
-    const { setUser, csrfToken } = useAuth();
+export default function Login() {
+	const { setUser, csrfToken } = useAuth();
 	const [error, setError] = React.useState(null);
+	const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const { email, password } = e.target.elements;
 		const body = {
@@ -29,7 +30,7 @@ export default function Login () {
 		}
 	};
 
-    return (
+	return (
         <div className="auth-form-container">
             <div>{error}</div>
             <form className="login-form" onSubmit={handleSubmit} method="POST" action="#">
@@ -41,9 +42,9 @@ export default function Login () {
                 <input  type="password" placeholder="Escribe tu contraseña..." id="password" className="form-auth" name="password" />
                 <div className="container-btn">
                 <button type="submit" className="btn btn-primary">Aceptar</button>
-                <button type="submit" className="btn btn-secondary">Cancelar</button>
+                <button type="button" className="btn btn-secondary" onClick={() => navigate('/register')}>Cancelar</button>
                 </div>
             </form>
         </div>
-    )
+    );
 }

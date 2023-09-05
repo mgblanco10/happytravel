@@ -6,7 +6,7 @@ import NavBar from '../components/NavBar';
 export default function GuestLayout() {
 	const { user } = useAuth();
 
-	// if user is logged in, redirect to profile page
+	
 	if (user) {
 		return <Navigate to="/dashboard" />;
 	}

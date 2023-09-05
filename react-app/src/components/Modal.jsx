@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/Modal.css";
 
 const ModalAction = (props) => {
     return (
@@ -11,10 +12,12 @@ const ModalAction = (props) => {
                     <button type="button" className="btn btn-secondary" onClick={props.onClose}>Cancelar</button>
                 </div>
             </div>
-        </div>
+         </div>
     );
 };
 
 export default ModalAction;
+
+
 
 

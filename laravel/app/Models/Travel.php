@@ -20,9 +20,9 @@ class Travel extends Model
     }
 
     static function search($query){
-        $results = Travel::where('title', 'LIKE', "%$query%")
+      $results = Travel::where('name', 'LIKE', "%$query%")
                          ->orWhere('location', 'LIKE', "%$query%")
                          ->get();
-        return $results;
+       return $results;
                             }
 }
