@@ -87,6 +87,12 @@
     width: 35px;
     padding: 5px;
   }
+  .not-query{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+  }
 
   @media (max-width: 767px) {
 

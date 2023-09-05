@@ -1,201 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import { fetchCards } from '../services/ApiGetArray';
-import { Link } from 'react-router-dom';
-import "../css/CardsGuest.css";
-import editIcon from '../assets/edit-icon.svg';
-import deleteIcon from '../assets/delete-icon.svg';
-import infoIcon from '../assets/Info.svg';
-import { useAuth } from '../contexts/AuthContext';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
-export default function CardsSearch({searchValue}) {
-  const [travels, setTravels] = useState([]);
-  const { user, setUser } = useAuth();
+import { Link } from 'react-router-dom';
+import infoIcon from '../assets/Info.svg';
+ 
+
+const CardsSearch = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const query = queryParams.get("query");
+
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const travels = await fetchCards();
-      setTravels(travels);
+    const fetchSearchResults = async () => {
+      try {
+        const formattedQuery = query.toLowerCase().replace(/\s+/g, '');
+        const response = await axios.get(`http://localhost:8000/api/happy_travel?search=${formattedQuery}`);
+        const data = response.data;
+        setSearchResults(data);
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      }
     };
+    if (query) {
+      fetchSearchResults();
+    }
+  }, [query]);
 
-    fetchData();
-  }, []);
-    console.log(searchValue);
   return (
     <div>
-      <div className="card">
-        {travels.map((travel) => (
-          
-          <div  key={travel.id} className="cards" style={{ width: '18.75rem', height: '25rem' }}>
-            {user && (
-                <Link to={`/details/${travel.id}`} className="card-link"> 
-                <img className="icon-info" src={infoIcon} alt="icono info"/>
+      {searchResults.length === 0 ? (
+        <p className='not-query'>No se encontraron destinos con el nombre, ni ubicación de la búsqueda realizada: "{query}"</p>
+      ) : (
+        <div className="card">
+          {searchResults.map((travel) => (
+            <div key={travel.id} className="cards" style={{ width: '18.75rem', height: '25rem' }}>
+              <Link to={`/details/${travel.id}`} className="card-link">
+                <img className="icon-info" src={infoIcon} alt="icono info" />
               </Link>
-              )}
-            <img className="card-img-top" src={`http://127.0.0.1:8000/${travel.image}`} alt="Card" />
-            <div className='date-cards'>
-              <div className="card-body">
-                <h5 className="card-title">{travel.name}</h5>
-                <p className="card-text">{travel.location}</p>
-              </div>
-              {user && (
-                <div>
-                  <Link to={`/edit/${travel.id}`} className="card-edit">
-                    <img className="icon-cards" src={editIcon} alt="icono de editar destino" />
-                  </Link>
-                  <Link to={`/delete/${travel.id}`} className="card-delete">
-                    <img className="icon-cards" src={deleteIcon} alt="icono de eliminar destino" />
-                  </Link>
+              <img className="card-img-top" src={`http://127.0.0.1:8000/${travel.image}`} alt="Card" />
+              <div className="date-cards">
+                <div className="card-body">
+                  <h5 className="card-title">{travel.name}</h5>
+                  <p className="card-text">{travel.location}</p>
                 </div>
-              )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
-}
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//METODO QUE POSIBLEMENTE FUNCIONE UNA VEZ QUE EL USUARIO SE REGISTRE O INICIE SESION
-
-// import React, { useState, useEffect } from 'react';
-// import { useLocation } from 'react-router-dom';
-// import { fetchCards } from '../services/ApiGetArray';
-// import { Link } from 'react-router-dom';
-// import "../css/CardsGuest.css";
-
-// import editIcon from '../assets/edit-icon.svg';
-// import deleteIcon from '../assets/delete-icon.svg';
-
-// export default function CardsGuest() {
-//   const [travels, setTravels] = useState([]);
-//   const location = useLocation(); 
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const travels = await fetchCards();
-//       setTravels(travels);
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   const shouldShowEditAndDelete = location.pathname === '/dashboard'; 
-
-//   return (
-//     <div>
-//       <div className="card">
-//         {travels.map((travel) => (
-//           <div className="cards" style={{ width: '18.75rem', height: '25rem' }}>
-//             <img className="card-img-top" src={`http://127.0.0.1:8000/${travel.image}`} alt="Card" />
-//             <div className='date-cards'>
-//               <div className="card-body">
-//                 <h5 className="card-title">{travel.name}</h5>
-//                 <p className="card-text">{travel.location}</p>
-//               </div>
-//               {shouldShowEditAndDelete && ( // Condición para renderizar los enlaces
-//                 <div>
-//                   <Link to={`/happy_travel/edit/${travel.id}`} className="card-edit"> {/* Cambia la ruta según tu configuración */}
-//                     <img className="icon-cards" src={editIcon} alt="icono de editar destino" />
-//                   </Link>
-//                   <Link to={`/happy_travel/delete/${travel.id}`} className="card-delete"> {/* Cambia la ruta según tu configuración */}
-//                     <img className="icon-cards" src={deleteIcon} alt="icono de eliminar destino" />
-//                   </Link>
-//                 </div>
-//               )}
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
+export default CardsSearch;
