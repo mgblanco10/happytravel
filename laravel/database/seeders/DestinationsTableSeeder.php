@@ -66,6 +66,7 @@ class DestinationsTableSeeder extends Seeder
             'location' => 'Argentina',
             'image' => 'images/talampaya-larioja.jpg',
             'description' => 'El Parque Nacional Talampaya se encuentra ubicado en la provincia de La Rioja en Argentina. Fue creado con el objetivo de proteger importantes yacimientos arqueológicos y paleontológicos de la zona. Es Patrimonio de la Humanidad.',
+
         ]);
         Travel::create([
             'name' => 'Hanoi',
