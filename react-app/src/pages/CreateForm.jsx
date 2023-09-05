@@ -64,11 +64,10 @@ export default function CreateForm() {
                         <label className="form-label">Imagen</label>
                         <div className="input-group">
                             <label className="input-group-text" htmlFor="fileInput">
-                                {/* <img className="prueba" src={folderImg}  alt="Icono de carpeta"/> */}
-                                {/* <input type="text" className="blue-background" placeholder="Sube una imagen" readOnly />
-                                <input type="text" className="form-control-input" placeholder="Sube una imagen" readOnly /> */}
-                                 <input className="form-control-input" type="file" onChange={(e) => setImage(e.target.files[0])} />
+                                <input type="file" className="blue-background d-none" placeholder="Sube una imagen" readOnly />
+                                 <img className="prueba" src={folderImg}  alt="Icono de carpeta"/> 
                             </label>
+                            <input className="form-control-input"   onChange={(e) => setImage(e.target.files[0])} />
                         </div>
                         
                         <p id="error-image" className="error"></p>

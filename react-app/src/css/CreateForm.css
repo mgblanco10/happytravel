@@ -5,7 +5,7 @@
     margin: auto;
     margin-top: 5%;
     margin-bottom: 5%;
-    width: 40%;
+    width: 60%;
     color: var(--font-color);
 }
 
@@ -85,7 +85,9 @@ h3{
     background-color: var(--font-color);
     border-radius: 20px 0px 0px 20px;
     box-shadow: var(--box-shadow);
-    width: 20%;
+    width: 67px;
+    height: 40px;
+    justify-content: center;
 }
 
 .form-create .form-label{
@@ -99,6 +101,7 @@ h3{
 
 .form-control-input{
  width: 100%;
+ height: 40px;
  margin: auto;
  border: none;
  border-radius: 20px;
@@ -133,6 +136,10 @@ h3{
     background-color: var(--font-color);
 }
 
+.input-group{
+    display: flex;
+}
+
 .add-file .input-group .input-group-text {
     cursor: pointer;
     position: relative;
@@ -140,8 +147,8 @@ h3{
 
 .add-file .input-group img {
     position: absolute;
-    top: 0.3rem;
-    left: 1rem;
+    top: 1.2rem;
+    left: 1.2rem;
 }
 
 .img-add{
