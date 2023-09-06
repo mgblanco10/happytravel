@@ -30,7 +30,7 @@ class TravelController extends Controller
                 'description' => 'required'
             ]);
 
-            $imagePath = null;
+            // $imagePath = null;
      
             if ($request->hasFile('image')) {
                 $image = $request->file('image');

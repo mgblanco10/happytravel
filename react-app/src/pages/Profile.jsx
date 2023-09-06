@@ -1,39 +1,52 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import "../css/Profile.css";
+import axios from 'axios'; 
 
 import avatarIcon from '../assets/avatar-icon.svg';
 import createIcon from '../assets/create-icon.svg';
 
 export default function Profile() {
   const { user } = useAuth();
-  const [avatar, setAvatar] = useState(user.avatar); // El estado para la imagen de perfil
+  const [avatar, setAvatar] = useState(user.avatar);
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const newAvatar = event.target.files[0];
-    setAvatar(newAvatar);
+    console.log('Nueva imagen seleccionada:', newAvatar); 
+    setAvatar(URL.createObjectURL(newAvatar)); 
 
-    // Aquí agregar código para subir la imagen a la base de datos.
-    // Ejemplo,  usar FormData .
-    // formData.append('image', newAvatar);
-    // Después de subir la imagen,que actualiza el avatar en la base de datos y en el estado local.
-    // También se puede mostrar un indicador de carga mientras se sube la imagen.
+    const formData = new FormData();
+    formData.append('avatar', newAvatar);
 
-    // Limpia el campo de entrada de archivo para que se pueda seleccionar una imagen diferente si es necesario.
-    event.target.value = '';
+    try {
+
+      await axios.post('http://localhost:8000/api/happy_travel/update-avatar', formData, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'multipart/form-data', 
+        },
+      });
+      console.log('Avatar subido con éxito');
+    } catch (error) {
+      console.error('Error al subir el avatar:', error);
+    }
   };
 
   return (
     <div className="container-profile">
       <img className="icon-nav profile" src={avatarIcon} alt="icono perfil" />
       <label className="fileInput-create-avatar" htmlFor="fileInput">
-	  <img className="icon-nav profileAvatar" src={createIcon} alt="icono de agregar fotografía" />
+        <img
+          className="icon-nav profileAvatar"
+          src={createIcon}
+          alt="icono de agregar fotografía"
+        />
         <input
           id="fileInput"
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          style={{ display: 'none' }} 
+          style={{ display: 'none' }}
         />
       </label>
       <h2 className="info-perfil title-profile">{user.name}</h2>
@@ -43,3 +56,4 @@ export default function Profile() {
     </div>
   );
 }
+
