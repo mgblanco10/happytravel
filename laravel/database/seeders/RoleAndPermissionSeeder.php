@@ -46,5 +46,6 @@ class RoleAndPermissionSeeder extends Seeder
             'delete-travels',
             'like-travels',
         ]);
+
     }
 }

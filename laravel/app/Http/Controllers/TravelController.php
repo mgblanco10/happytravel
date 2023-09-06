@@ -13,7 +13,10 @@ class TravelController extends Controller
 {
      public function __construct()
      {
-         $this->middleware('checkUserRole', ['except' => ['index', 'search']]);    }
+         $this->middleware('checkUserRole', ['except' => ['index', 'search']]);
+           }
+
+
 
     public function index()
     {
@@ -77,9 +80,13 @@ class TravelController extends Controller
          
         try {
             $user = Auth::user();
-         if ($travel->user_id !== Auth::id()) {
-             return response()->json(['error' => 'No tienes permiso para editar este destino.'], 403);
-             }
+            if (!$user->hasRole('Admin')) {
+                $travel = Travel::findOrFail($id);
+    
+                if ($travel->user_id !== Auth::id()) {
+                    return response()->json(['error' => 'No tienes permiso para editar este destino.'], 403);
+                }
+            }
             
             $travel = $this->findTravelOrFail($id);
             return response()->json($travel);
@@ -94,9 +101,13 @@ class TravelController extends Controller
         try {
             $travel = Travel::findOrFail($id);
              $user = Auth::user();
-             if ($travel->user_id !== Auth::id() || !$user->can('edit-travels')) {
-                 return response()->json(['error' => 'No tienes permiso para editar este destino.'], 403);
-                 }
+             if (!$user->hasRole('Admin')) {
+                $travel = Travel::findOrFail($id);
+    
+                if ($travel->user_id !== Auth::id()) {
+                    return response()->json(['error' => 'No tienes permiso para editar este destino.'], 403);
+                }
+            }
             $request->validate([
                 'name' => 'required',
                 'location' => 'required',
