@@ -6,6 +6,7 @@ export const deleteTravel = async (id) => {
       withCredentials: true,
       headers: {
         "Accept": "application/json",
+        "Content-Type": "application/json",
       },
     });
 

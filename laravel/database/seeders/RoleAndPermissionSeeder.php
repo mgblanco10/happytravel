@@ -19,9 +19,11 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'create-travels']);
         Permission::create(['name' => 'edit-travels']);
         Permission::create(['name' => 'delete-travels']);
+        Permission::create(['name' => 'like-travels']);
 
         $superAdminRole = Role::create(['name' => 'SuperAdmin']);
         $adminRole = Role::create(['name' => 'Admin']);
+        $userRole = Role::create(['name' => 'User']);
 
         $superAdminRole->givePermissionTo([
             'create-users',
@@ -36,6 +38,13 @@ class RoleAndPermissionSeeder extends Seeder
             'create-travels',
             'edit-travels',
             'delete-travels',
+        ]);
+
+        $userRole->givePermissionTo([
+            'create-travels',
+            'edit-travels',
+            'delete-travels',
+            'like-travels',
         ]);
     }
 }

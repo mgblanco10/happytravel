@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import "../css/CreateForm.css";
 import axios from 'axios';
-import folderImg from '../assets/file-icon.svg';
+import Imgadd from '../assets/file-icon.svg';
 import { useParams, Navigate  } from 'react-router-dom';
 import { fetchCardDetails } from '../services/ApiGetCardDetails'
 import {editCard} from '../services/ApiEditTravel'
+import {  useNavigate } from 'react-router-dom';
 
 export default function EditForm() {
   const { id } = useParams();
@@ -13,6 +14,7 @@ export default function EditForm() {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
   const [redirectToDashboard, setRedirectToDashboard] = useState(false); 
+	const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -28,6 +30,15 @@ export default function EditForm() {
   
     fetchDetails();
   }, [id]);
+
+  const handleFileInputChange = (e) => {
+    // Manejar la selección de archivos aquí
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      // Realiza acciones con el archivo seleccionado aquí
+      console.log('Archivo seleccionado:', selectedFile);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,6 +83,30 @@ if (redirectToDashboard) {
             <input id="location" className="form-control" type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
             <p id="error-location" className="error"></p>
           </div>
+
+          <div className="add_file mb-5">
+              <label htmlFor="validationTextarea" className="form-label">Imagen</label>
+              <div className="input-group">
+                <label className="input-group-text" htmlFor="fileInput">
+                  <img
+                    className="img_add"
+                    src={Imgadd}
+                    alt="Icono de carpeta"
+                    width="30"
+                    height="30"
+                    onClick={() => document.getElementById('fileInput').click()}
+                  />     
+                  <input
+                    type="file"
+                    id="fileInput"
+                    accept="image/*"
+                    onChange={handleFileInputChange}
+                  />         
+                </label>
+                <input type="text" className="form-control shadow-top blue-background" placeholder="Sube una imagen" readOnly />
+              </div>
+              <div className="invalid-feedback">Example invalid form file feedback</div>
+          </div>
           
         </div>
         <div className="columna2">
@@ -84,7 +119,7 @@ if (redirectToDashboard) {
      
             <button className="btn-primary" type="submit">Aceptar</button>
          
-        <button className="btn-secondary">Cancelar</button>
+        <button className="btn-secondary" type="button" onClick={() => navigate('/dashboard')}>Cancelar</button>
       </div>
     </form>
   );

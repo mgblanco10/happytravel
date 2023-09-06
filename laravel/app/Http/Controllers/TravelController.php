@@ -11,16 +11,20 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TravelController extends Controller
 {
-   
+     public function __construct()
+     {
+         $this->middleware('checkUserRole', ['except' => ['index', 'search']]);    }
+
     public function index()
     {
         $travels = Travel::all();
         return response()->json($travels);
+        
     }
 
     
     public function store(Request $request): JsonResponse
-    {
+    {    
         try {
     
             $request->validate([
@@ -39,7 +43,7 @@ class TravelController extends Controller
                 $imagePath = 'images/' . $imageName;
             }
             $user = Auth::user();
-
+            
             $travel = Travel::create([
                 'name' => $request->input('name'),
                 'location' => $request->input('location'),
@@ -67,10 +71,16 @@ class TravelController extends Controller
         }
     }
 
-    
+
     public function edit($id): JsonResponse
     {
+         
         try {
+            $user = Auth::user();
+         if ($travel->user_id !== Auth::id()) {
+             return response()->json(['error' => 'No tienes permiso para editar este destino.'], 403);
+             }
+            
             $travel = $this->findTravelOrFail($id);
             return response()->json($travel);
         } catch (\Exception $e) {
@@ -80,9 +90,13 @@ class TravelController extends Controller
     
     public function update(Request $request, $id): JsonResponse
     {
+                
         try {
             $travel = Travel::findOrFail($id);
-    
+             $user = Auth::user();
+             if ($travel->user_id !== Auth::id() || !$user->can('edit-travels')) {
+                 return response()->json(['error' => 'No tienes permiso para editar este destino.'], 403);
+                 }
             $request->validate([
                 'name' => 'required',
                 'location' => 'required',
@@ -98,7 +112,6 @@ class TravelController extends Controller
                 }
                 $travel->image = $imagePath;
             }
-    
             $travel->update([
                 'name' => $request->input('name'),
                 'location' => $request->input('location'),
@@ -115,14 +128,13 @@ class TravelController extends Controller
      
 
     public function destroy($id): JsonResponse
-    {
+    {       
         try {
             $travel = Travel::findOrFail($id);
-
-            if ($travel->user_id !== Auth::id()) {
-                return response()->json(['success' => false, 'error' => 'No tienes permiso para eliminar este destino.']);
-            }
-
+            $user = Auth::user();
+            if ($travel->user_id !== Auth::id() || !$user->can('delete-travels')) {
+                return response()->json(['success' => false, 'error' => 'No tienes permiso para eliminar este destino.'], 403);
+           }
             if ($travel->image) {
                 Storage::disk('public')->delete($travel->image);
             }
@@ -135,43 +147,8 @@ class TravelController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
-    }
+    } 
 
-//     public function search(Request $request)
-//     {
-//    $travels = Travel::search($request->search);
-
-//    return response()->json($travels);
-//     }
-// public function search(Request $request)
-// {
-//     $searchTerm = $request->input('search');
-
-//     $travels = Travel::search($searchTerm);
-
-//     return response()->json($travels);
-// }
-// public function search(Request $request)
-// {
-//     $searchTerm = $request->input('search');
-
-//     // $travels = Travel::where('title', 'like', '%' . $searchTerm . '%')
-//     //                   ->orWhere('location', 'like', '%' . $searchTerm . '%')
-//     //                   ->get();
-
-//     // $travels = Travel::where(function($query) use ($searchTerm) {
-//     //     $query->where('title', 'like', '%' . $searchTerm . '%')
-//     //           ->orWhere('location', 'like', '%' . $searchTerm . '%');
-//     // })->get();
-
-//     // $travels = Travel::where(function($query) use ($searchTerm) {
-//     //     $query->where('name', 'like', '%' . $searchTerm . '%');
-//     //     $query->orWhere('location', 'like', '%' . $searchTerm . '%');
-//     // })->get();
-
-
-//     // return response()->json($travels);
-// }
 public function search(Request $request)
 {
     $searchTerm = $request->input('search');
