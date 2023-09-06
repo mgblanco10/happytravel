@@ -81,12 +81,15 @@ h3{
     display: flex;
     flex-direction: column;
 }
+#fileInput {
+    display: none;
+  }
 
 .blue-background{
-    background-color: var(--font-color);
-    border-radius: 20px 0px 0px 20px;
+    background-color:var(--background-color);
+    border-radius: 0px 20px 20px 0px;
     box-shadow: var(--box-shadow);
-    width: 67px;
+    width: 100%;
     height: 40px;
     justify-content: center;
 }
@@ -116,6 +119,15 @@ h3{
 }
 
 
+.img_add{
+    background-color: var(--font-color);
+    height:25px;
+    width: 33px;
+    margin-left:10px;
+    margin-top: 3px;
+}
+
+
 .custom-textarea{
     width: 100%;
     height: 17.5rem;
@@ -139,6 +151,8 @@ h3{
 
 .input-group{
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .add-file .input-group .input-group-text {
@@ -146,15 +160,16 @@ h3{
     position: relative;
 }
 
-.add-file .input-group img {
-    position: absolute;
-    top: 1.2rem;
-    left: 1.2rem;
+.input-group-text{
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    width: 67px;
+    background:var(--font-color);
+    border-radius: 20px 0px 0px 20px;
+
 }
 
-.img-add{
-    background-color: var(--font-color);
-}
 
 
 @media (max-width: 768px) {
