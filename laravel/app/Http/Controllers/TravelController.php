@@ -143,9 +143,12 @@ class TravelController extends Controller
         try {
             $travel = Travel::findOrFail($id);
             $user = Auth::user();
-            if ($travel->user_id !== Auth::id() || !$user->can('delete-travels')) {
-                return response()->json(['success' => false, 'error' => 'No tienes permiso para eliminar este destino.'], 403);
-           }
+            if (!$user->hasRole('Admin')) {
+                if ($travel->user_id !== Auth::id()) {
+                    return response()->json(['success' => false, 'error' => 'No tienes permiso para eliminar este destino.'], 403);
+                }
+            
+            }
             if ($travel->image) {
                 Storage::disk('public')->delete($travel->image);
             }
