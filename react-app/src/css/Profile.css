@@ -1,0 +1,39 @@
+.container-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative; 
+  }
+  
+  .profile {
+    width: 200px; 
+    margin-bottom: -80px; 
+  }
+  .profileAvatar{
+    width: 70px;
+    margin-left: 140px;
+    background-color: white;
+    border-radius: 40px;
+  }
+  
+  .create-icon {
+    width: 80px; 
+    height: 80px;
+    z-index: 1; 
+  }
+  
+  .info-perfil {
+    color: #FF0060;
+    text-align: center; 
+    font-size: 18px;
+  }
+
+  .title-profile{
+    font-size: 26px;
+  }
+
+  .info-perfil span{
+    color: black;
+  }
+
