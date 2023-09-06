@@ -5,6 +5,7 @@ import Imgadd from '../assets/file-icon.svg';
 import { useParams, Navigate  } from 'react-router-dom';
 import { fetchCardDetails } from '../services/ApiGetCardDetails'
 import {editCard} from '../services/ApiEditTravel'
+import {  useNavigate } from 'react-router-dom';
 
 export default function EditForm() {
   const { id } = useParams();
@@ -13,6 +14,7 @@ export default function EditForm() {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
   const [redirectToDashboard, setRedirectToDashboard] = useState(false); 
+	const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -117,7 +119,7 @@ if (redirectToDashboard) {
      
             <button className="btn-primary" type="submit">Aceptar</button>
          
-        <button className="btn-secondary">Cancelar</button>
+        <button className="btn-secondary" type="button" onClick={() => navigate('/dashboard')}>Cancelar</button>
       </div>
     </form>
   );
