@@ -4,6 +4,7 @@ import axios from 'axios';
 import folderImg from '../assets/file-icon.svg';
 import { useParams, Navigate  } from 'react-router-dom';
 import { fetchCardDetails } from '../services/ApiGetCardDetails'
+import {editCard} from '../services/ApiEditTravel'
 
 export default function EditForm() {
   const { id } = useParams();
@@ -37,27 +38,20 @@ export default function EditForm() {
     formData.append('location', location);
     formData.append('description', description);
 
-  try {
-    const response = await axios.put(`http://localhost:8000/api/happy_travel/${id}`, formData, {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const response = await editCard(id, formData); 
+      console.log('Solicitud PUT enviada');
+      console.log('Datos del formulario:', formData);
+      console.log('Respuesta del servidor:', response);
 
-    console.log('Solicitud PUT enviada');
-    console.log('Datos del formulario:', formData);
-    console.log('Respuesta del servidor:', response.data);
-  
-    setName(response.data.name);
-    setLocation(response.data.location);
-    setDescription(response.data.description);
-    setRedirectToDashboard(true);
-
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
+      setName(response.name);
+      setLocation(response.location);
+      setDescription(response.description);
+      setRedirectToDashboard(true);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };  
 
 if (redirectToDashboard) {
   return <Navigate to="/dashboard" />;

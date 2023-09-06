@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import axios from '../services/axios';
 import { useAuth } from '../contexts/AuthContext';
 import NavBar from './NavBar';
 
 export default function DefaultLayout() {
 	const { user, setUser } = useAuth();
-
+	const location = useLocation();
 	
 	useEffect(() => {
 		(async () => {
@@ -41,9 +41,10 @@ export default function DefaultLayout() {
 			console.log(error);
 		}
 	};
+	const hideSearch = location.pathname === '/register' || location.pathname === '/login' || location.pathname === '/profile' || location.pathname === '/create';
 	return (
 		<>
-		<NavBar onLogout={handleLogout}/>
+		<NavBar onLogout={handleLogout} hideSearch={hideSearch}/>
 			<main>
                 <Outlet />
 			</main>

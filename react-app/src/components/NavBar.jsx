@@ -10,7 +10,7 @@ import createIcon from '../assets/create-icon.svg';
 import logoutIcon from '../assets/logout-icon.svg';
 import homeIcon from '../assets/home-icon.svg';
 
-const NavBar = ({ onLogout }) => {
+const NavBar = ({ onLogout, hideSearch }) => {
   const [searchValue, setSearchValue] = useState('');
   const { user, setUser } = useAuth();
 
@@ -26,33 +26,10 @@ const NavBar = ({ onLogout }) => {
         <div className="logo-container">
           <img src={logoImage} alt="imagen del Logo" />
         </div>
-        <div className="search-input-container">
-          <form onSubmit={handleSearch}>
-            <div className="form-control-container">
-              <input
-                type="text"
-                id="search"
-                name="search"
-                className="form-control"
-                placeholder="Search..."
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-              />
-              <img
-                id="search-icon"
-                className="search-icon"
-                src={glassIcon}
-                alt="icono de búsqueda"
-                onClick={handleSearch}
-              />
-            </div>
-          </form>
-        </div>
         <div className="navbar-icons">
           <Link to="/" className="nav-link">
             <img className="icon-nav" src={homeIcon} alt="icono home" />
           </Link>
-
           <Link to="/register" className="nav-link">
             <img className="icon-nav" src={avatarIcon} alt="icono perfil" />
           </Link>
@@ -69,6 +46,7 @@ const NavBar = ({ onLogout }) => {
         <div className="logo-container">
           <img src={logoImage} alt="imagen del Logo" />
         </div>
+        {!hideSearch &&(
         <div className="search-input-container">
           <form onSubmit={handleSearch}>
             <div className="form-control-container">
@@ -91,6 +69,7 @@ const NavBar = ({ onLogout }) => {
             </div>
           </form>
         </div>
+        )}
         <div className="navbar-icons">
           <Link to="/" className="nav-link">
             <img className="icon-nav" src={homeIcon} alt="icono home" />
