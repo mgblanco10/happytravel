@@ -12,9 +12,9 @@ class Travel extends Model
 
     protected $table = 'destinations';
 
-    protected $fillable = ['name', 'location', 'image', 'description','privacy'];
+    protected $fillable = ['name', 'location', 'image', 'description', 'user_id'];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
