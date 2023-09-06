@@ -19,44 +19,6 @@ class Travel extends Model
         return $this->belongsTo(User::class);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     static function search($query){
       $results = Travel::where('name', 'LIKE', "%$query%")
                          ->orWhere('location', 'LIKE', "%$query%")
