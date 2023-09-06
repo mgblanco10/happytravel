@@ -11,19 +11,19 @@ export default function CreateForm() {
     const [image, setImage] = useState(null);
     const [redirectToDashboard, setRedirectToDashboard] = useState(false); 
   
-    const handleFileInputChange = (e) => {
-      // Manejar la selección de archivos aquí
-      const selectedFile = e.target.files[0];
-      if (selectedFile) {
-        // Realiza acciones con el archivo seleccionado aquí
-        console.log('Archivo seleccionado:', selectedFile);
-      }
-    };
+    // const handleFileInputChange = (e) => {
+    //   // Manejar la selección de archivos aquí
+    //   const selectedFile = e.target.files[0];
+    //   if (selectedFile) {
+    //     // Realiza acciones con el archivo seleccionado aquí
+    //     console.log('Archivo seleccionado:', selectedFile);
+    //   }
+    // };
 
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-    
+    console.log("holaaa")
       const formData = new FormData();
       formData.append('name', name);
       formData.append('location', location);
@@ -31,7 +31,7 @@ export default function CreateForm() {
       formData.append('description', description);
     
       try {
-        const response = await axios.post('http://localhost:8000/api/happy_travel', formData, {
+        const response = axios.post('http://localhost:8000/api/happy_travel', formData, {
           withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data", 
@@ -72,29 +72,17 @@ export default function CreateForm() {
           </div>
           
           
-          <div className="add_file mb-5">
-              <label htmlFor="validationTextarea" className="form-label">Imagen</label>
-              <div className="input-group">
-                <label className="input-group-text" htmlFor="fileInput">
-                  <img
-                    className="img_add"
-                    src={Imgfile}
-                    alt="Icono de carpeta"
-                    width="30"
-                    height="30"
-                    onClick={() => document.getElementById('fileInput').click()}
-                  />     
-                  <input
-                    type="file"
-                    id="fileInput"
-                    accept="image/*"
-                    onChange={handleFileInputChange}
-                  />         
-                </label>
-                <input type="text" className="form-control shadow-top blue-background" placeholder="Sube una imagen" readOnly />
-              </div>
-              <div className="invalid-feedback">Example invalid form file feedback</div>
-          </div>
+          <div className="add-file">
+                        <label className="form-label">Imagen</label>
+                        <div className="input-group">
+                            <label className="input-group-text" htmlFor="fileInput">
+                                 <input className="form-control-input" type="file" onChange={(e) => setImage(e.target.files[0])} />
+                            </label>
+                            <input className="form-control-input"   onChange={(e) => setImage(e.target.files[0])} />
+                        </div>
+                        
+                        <p id="error-image" className="error"></p>
+                    </div>
           
         </div>
 
@@ -104,10 +92,10 @@ export default function CreateForm() {
           <textarea name="description" className="custom-textarea" id="description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
         </div>
       </div>
+
       <div className="btn-container">
      
-            <button className="btn-primary" type="submit">Aceptar</button>
-         
+        <button className="btn-primary" type="submit">Aceptar</button>
         <button className="btn-secondary">Cancelar</button>
       </div>
     </form>
