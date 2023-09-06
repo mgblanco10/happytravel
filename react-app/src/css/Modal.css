@@ -17,8 +17,8 @@
 }
 
 .modal-content {
-  background-color: #fff;
-  border-radius: 8px;
+  background-color:#FBFDCE;
+  border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   max-width: 400px;
   padding: 20px;
@@ -37,7 +37,9 @@
 
 
 .modal-title {
-  font-size: 18px;
+  font-size: 19px;
   margin-top: 20px;
   margin-bottom: 10px;
+  color: #0079FF;
 }
+

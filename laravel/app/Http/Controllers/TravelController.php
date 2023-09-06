@@ -38,12 +38,14 @@ class TravelController extends Controller
                 $image->move(public_path('images'), $imageName);
                 $imagePath = 'images/' . $imageName;
             }
-    
+            $user = Auth::user();
+
             $travel = Travel::create([
                 'name' => $request->input('name'),
                 'location' => $request->input('location'),
                 'image' =>$imagePath,
-                'description' => $request->input('description')
+                'description' => $request->input('description'), 
+                'user_id' => $user -> id,
             ]);
     
             return response()->json(['success' => true, 'message' => '¡Destino actualizado exitosamente!']);

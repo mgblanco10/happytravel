@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('destinations', function (Blueprint $table) {
-            $table->id();
+            $table->id();           
             $table->string('name');
             $table->string('location');
             $table->string('image');
             $table->string('description');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+
             $table->timestamps();
         });
     }
