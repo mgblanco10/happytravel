@@ -27,11 +27,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'user']);
     Route::apiResource('happy_travel', TravelController::class);
-    Route::post('/update-avatar', [UserController::class, 'updateAvatar']);
 });
 
 
 Route::get('/happy_travel', [TravelController::class, 'search']);
+Route::patch('/update', [UserController::class, 'updateAvatar']);
+// Route::patch('/update-avatar/{id}', [UserController::class, 'updateAvatar']);
+// Route::patch('/update/{id}', [UserController::class, 'update']);
 
 
 

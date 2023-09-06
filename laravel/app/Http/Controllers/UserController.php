@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
-    public function updateAvatar(Request $request)
+    public function updateAvatar(Request $request){
     {
         try {
-            // $user = Auth::user(); 
             $user = Auth::user(); 
 
             $request->validate([
@@ -37,4 +37,8 @@ class UserController extends Controller
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
+    }
 }
+
+
+    
