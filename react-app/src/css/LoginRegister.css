@@ -159,7 +159,7 @@ label[for="password"] {
     }
     
     .auth-form-container, .login-form, .register-form {
-      width: 80%;
+      width: 100%;
       margin: 0 auto; 
       align-items: center;
     }
@@ -171,20 +171,19 @@ label[for="password"] {
     .auth-form-container {
       padding: 0.5rem;
     }
-  
-  }
-  
-  
-  @media (max-width: 768px) {
-     
-      .auth-form-container, .login-form, .register-form {
-        width: 70%;  
+
+
+      .container-btn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
-  
-      .form-auth {
-        width: 100%; 
+
+      .btn{
+        margin: 10px;
       }
+      
+
   
-    
   }
   
