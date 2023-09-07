@@ -33,6 +33,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::get('/happy_travel', [TravelController::class, 'search']);
 
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+    
+});
 
 
 

@@ -11,7 +11,7 @@ import ModalAction from './Modal';
 
 export default function CardsGuest() {
   const [travels, setTravels] = useState([]);
-  const { user, setUser } = useAuth();
+  const { user, hasRole, can } = useAuth();
   const [deleteId, setDeleteId] = useState(null); 
 
   useEffect(() => {
@@ -46,18 +46,18 @@ export default function CardsGuest() {
       <div className="card">
         {travels.map((travel) => (
           <div  key={travel.id} className="cards" style={{ width: '18.75rem', height: '25rem' }}>
-            {user && (
-              <Link to={`/details/${travel.id}`} className="card-link"> 
-                <img className="icon-info" src={infoIcon} alt="icono info"/>
-              </Link>
-            )}
+                {(user && hasRole('Admin')) || (user && user.id === travel.user_id) ? ( 
+            <Link to={`/details/${travel.id}`} className="card-link"> 
+            <img className="icon-info" src={infoIcon} alt="icono info" />
+            </Link>
+                ) : null}
             <img className="card-img-top" src={`http://127.0.0.1:8000/${travel.image}`} alt="Card" />
             <div className='date-cards'>
               <div className="card-body">
                 <h5 className="card-title">{travel.name}</h5>
                 <p className="card-text">{travel.location}</p>
               </div>
-              {user && (
+              {(user && hasRole('Admin')) || (user && user.id === travel.user_id) ? ( 
                 <div>
                   <Link to={`/edit/${travel.id}`} className="card-edit">
                     <img className="icon-cards" src={editIcon} alt="icono de editar destino" />
@@ -66,8 +66,8 @@ export default function CardsGuest() {
                     <img className="icon-cards-delete" src={deleteIcon} alt="icono de eliminar destino" />
                   </button>
                 </div>
-              )}
-            </div>
+                ) : null}
+                </div>
           </div>
         ))}
       </div>

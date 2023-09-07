@@ -10,6 +10,9 @@ import EditForm from '../pages/EditForm';
 import CreateForm from '../pages/CreateForm';
 import Details from '../pages/Details';
 import Search from '../pages/Search';
+import UserList from '../pages/Users';
+import CreateUser from '../pages/CreateUser';
+import EditUser from '../pages/EditUser';
 
 const router = createBrowserRouter([
 	{
@@ -57,6 +60,18 @@ const router = createBrowserRouter([
 			{
 				path: '/search',
 				element: <Search />,
+			},
+			{
+				path: '/admin',
+				element: <UserList />,
+			},
+			{
+				path: '/createUser',
+				element: <CreateUser />
+			},
+			{
+				path: '/editUser',
+				element: <EditUser />
 			},
 		],
 	},

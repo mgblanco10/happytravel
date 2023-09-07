@@ -20,8 +20,5 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DestinationsTableSeeder::class,
         ]);
-        $this->call([
-            AdminUserSeeder::class,
-        ]);
     }
 }

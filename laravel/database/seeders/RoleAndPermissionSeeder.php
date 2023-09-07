@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
 
 class RoleAndPermissionSeeder extends Seeder
 {
@@ -46,6 +47,13 @@ class RoleAndPermissionSeeder extends Seeder
             'delete-travels',
             'like-travels',
         ]);
+
+        $user = User::create([
+            'name' => 'Super Admin', 
+            'email' => 'superadmin@gmail.com',
+            'password' => bcrypt('123456')
+        ]);
+        
 
     }
 }
