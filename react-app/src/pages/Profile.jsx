@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import "../css/Profile.css";
 import axios from 'axios'; 
+import ViewOptions from './ViewOptions';
 
 import avatarIcon from '../assets/avatar-icon.svg';
 import createIcon from '../assets/create-icon.svg';
@@ -9,6 +10,7 @@ import createIcon from '../assets/create-icon.svg';
 export default function Profile() {
   const { user } = useAuth();
   const [avatar, setAvatar] = useState(localStorage.getItem('avatar') || avatarIcon);
+  const [viewOption, setViewOption] = useState('favorites');
 
   useEffect(() => {
     if (user.avatar) {
@@ -41,6 +43,11 @@ export default function Profile() {
         console.error('Error al subir el avatar:', error);
       });
   };
+
+  const changeView = (option) => {
+    setViewOption(option);
+  };
+
 	return (
 		<div className="container-profile">
 		  <img className="icon-nav profile" src={avatar} alt="icono perfil" />
@@ -61,6 +68,8 @@ export default function Profile() {
 	  <div className="info-perfil">
         Email: <span>{user.email}</span>
       </div>
+
+      <ViewOptions viewOption={viewOption} onViewOptionChange={changeView} />
 	  </div>
   );
 }
