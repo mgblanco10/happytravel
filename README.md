@@ -93,8 +93,12 @@ DB_PASSWORD=contraseña`
 
 1. ingresa al directorio del proyecto
  `cd react-app`
-2. 
-<img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
+2. Instala las dependencias de npm
+`npm install`
+3. Inicia el proyecto
+`npm start`
+4. El frontend de React ahora está en funcionamiento y se ejecuta en 
+`http://localhost:3000`
 
 
 ## Mockups

@@ -1,3 +1,140 @@
+// import React, { useState, useEffect } from 'react';
+// import { useAuth } from '../contexts/AuthContext';
+// import "../css/Profile.css";
+// import axios from 'axios'; 
+
+// import avatarIcon from '../assets/avatar-icon.svg';
+// import createIcon from '../assets/create-icon.svg';
+
+// export default function Profile() {
+//   const { user } = useAuth();
+//   const [avatar, setAvatar] = useState(localStorage.getItem('avatar') || avatarIcon);
+
+
+//   useEffect(() => {
+//     if (user.avatar) {
+//       setAvatar(`http://localhost:8000/uploads/${user.avatar}`);
+//       localStorage.setItem('avatar', `http://localhost:8000/uploads/${user.avatar}`);
+//     } else {
+//       setAvatar(avatarIcon); 
+//     }
+//   }, [user.avatar]);
+
+//   const handleImageChange = (event) => {
+//     const newAvatar = event.target.files[0];
+//     console.log('Nueva imagen seleccionada:', newAvatar);
+//     setAvatar(URL.createObjectURL(newAvatar));
+  
+//     const formData = new FormData();
+//     formData.append('avatar', newAvatar);
+  
+//     axios
+//       .post('http://localhost:8000/api/update-avatar', formData, {
+//         withCredentials: true,
+//         headers: {
+//           'Content-Type': 'multipart/form-data',
+//         },
+//       })
+//       .then(() => {
+//         console.log('Avatar subido con éxito');
+//       })
+//       .catch((error) => {
+//         console.error('Error al subir el avatar:', error);
+//       });
+//   };
+// 	return (
+// 		<div className="container-profile">
+// 		  <img className="icon-nav profile" src={avatar} alt="icono perfil" />
+// 		  <label className="fileInput-create-avatar" htmlFor="fileInput">
+// 		  <img
+//           className="icon-nav profileAvatar"
+//           src={createIcon}
+//           alt="icono de agregar fotografía"
+//         />
+// 		<input
+//           id="fileInput"
+//           type="file"
+//           accept="image/*"
+//           onChange={handleImageChange}
+// 		  />
+//       </label>
+//       <h2 className="info-perfil title-profile">{user.name}</h2>
+// 	  <div className="info-perfil">
+//         Email: <span>{user.email}</span>
+//       </div>
+// 	  </div>
+//   );
+// }
+
+
+//////////////////////////////////////////////////
+
+// import React, { useState, useEffect } from 'react';
+// import { useAuth } from '../contexts/AuthContext';
+// import "../css/Profile.css";
+// import axios from 'axios'; 
+
+// import avatarIcon from '../assets/avatar-icon.svg';
+// import createIcon from '../assets/create-icon.svg';
+
+// export default function Profile() {
+//   const { user } = useAuth();
+//   const [avatar, setAvatar] = useState(avatarIcon); 
+
+//   useEffect(() => {
+//     if (user.avatar) {
+//       setAvatar(`http://localhost:8000/uploads/${user.avatar}`);
+//     }
+//   }, [user.avatar]);
+
+//   const handleImageChange = (event) => {
+//     const newAvatar = event.target.files[0];
+//     console.log('Nueva imagen seleccionada:', newAvatar);
+//     setAvatar(URL.createObjectURL(newAvatar));
+  
+//     const formData = new FormData();
+//     formData.append('avatar', newAvatar);
+  
+//     axios
+//       .post('http://localhost:8000/api/update-avatar', formData, {
+//         withCredentials: true,
+//         headers: {
+//           'Content-Type': 'multipart/form-data',
+//         },
+//       })
+//       .then(() => {
+//         console.log('Avatar subido con éxito');
+//       })
+//       .catch((error) => {
+//         console.error('Error al subir el avatar:', error);
+//       });
+//   };
+
+//   return (
+//     <div className="container-profile">
+//       <img className="icon-nav profile" src={avatar} alt="icono perfil" />
+//       <label className="fileInput-create-avatar" htmlFor="fileInput">
+//         <img
+//           className="icon-nav profileAvatar"
+//           src={createIcon}
+//           alt="icono de agregar fotografía"
+//         />
+//         <input
+//           id="fileInput"
+//           type="file"
+//           accept="image/*"
+//           onChange={handleImageChange}
+//         />
+//       </label>
+//       <h2 className="info-perfil title-profile">{user.name}</h2>
+//       <div className="info-perfil">
+//         Email: <span>{user.email}</span>
+//       </div>
+//     </div>
+//   );
+// }
+
+
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import "../css/Profile.css";
@@ -9,17 +146,16 @@ import createIcon from '../assets/create-icon.svg';
 
 export default function Profile() {
   const { user } = useAuth();
-  const [avatar, setAvatar] = useState(localStorage.getItem('avatar') || avatarIcon);
+  const [avatar, setAvatar] = useState(avatarIcon); 
   const [viewOption, setViewOption] = useState('favorites');
 
   useEffect(() => {
-    if (user.avatar) {
-      setAvatar(`http://localhost:8000/uploads/${user.avatar}`);
-      localStorage.setItem('avatar', `http://localhost:8000/uploads/${user.avatar}`);
-    } else {
-      setAvatar(avatarIcon); 
+   
+    if (user.image) {
+      // setAvatar(`http://localhost:8000/uploads/${user.image}`);
+      setAvatar(`http://localhost:8000/storage/avatars/${user.image}`);
     }
-  }, [user.avatar]);
+  }, [user.image]);
 
   const handleImageChange = (event) => {
     const newAvatar = event.target.files[0];
@@ -27,7 +163,7 @@ export default function Profile() {
     setAvatar(URL.createObjectURL(newAvatar));
   
     const formData = new FormData();
-    formData.append('avatar', newAvatar);
+    formData.append('image', newAvatar);
   
     axios
       .post('http://localhost:8000/api/update-avatar', formData, {
@@ -43,11 +179,6 @@ export default function Profile() {
         console.error('Error al subir el avatar:', error);
       });
   };
-
-  const changeView = (option) => {
-    setViewOption(option);
-  };
-
 	return (
 		<div className="container-profile">
 		  <img className="icon-nav profile" src={avatar} alt="icono perfil" />
@@ -57,19 +188,21 @@ export default function Profile() {
           src={createIcon}
           alt="icono de agregar fotografía"
         />
-		<input
+        <input
           id="fileInput"
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-		  />
+        />
       </label>
       <h2 className="info-perfil title-profile">{user.name}</h2>
-	  <div className="info-perfil">
+      <div className="info-perfil">
         Email: <span>{user.email}</span>
       </div>
-
-      <ViewOptions viewOption={viewOption} onViewOptionChange={changeView} />
 	  </div>
   );
 }
+
+
+
+
