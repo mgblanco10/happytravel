@@ -77,12 +77,12 @@ class AuthController extends Controller {
         return response()->json(['error' => 'No se ha encontrado el usuario autenticado'], 401);
     }
 
-    if ($request->hasFile('avatar')) {
+    if ($request->hasFile('image')) {
         $request->validate([
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $file = $request->file('avatar');
+        $file = $request->file('image');
         $fileName = time() . '_' . $file->getClientOriginalName();
         $file->storeAs('avatars', $fileName, 'public'); 
 
