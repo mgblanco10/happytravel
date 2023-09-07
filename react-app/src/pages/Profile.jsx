@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import "../css/Profile.css";
 import axios from 'axios'; 
@@ -8,7 +8,16 @@ import createIcon from '../assets/create-icon.svg';
 
 export default function Profile() {
   const { user } = useAuth();
-  const [avatar, setAvatar] = useState(user.avatar);
+  const [avatar, setAvatar] = useState(localStorage.getItem('avatar') || avatarIcon);
+
+  useEffect(() => {
+    if (user.avatar) {
+      setAvatar(`http://localhost:8000/uploads/${user.avatar}`);
+      localStorage.setItem('avatar', `http://localhost:8000/uploads/${user.avatar}`);
+    } else {
+      setAvatar(avatarIcon); 
+    }
+  }, [user.avatar]);
 
   const handleImageChange = async (event) => {
     const newAvatar = event.target.files[0];
@@ -32,7 +41,7 @@ export default function Profile() {
 	};
 	return (
 		<div className="container-profile">
-		  <img className="icon-nav profile" src={avatarIcon} alt="icono perfil" />
+		  <img className="icon-nav profile" src={avatar} alt="icono perfil" />
 		  <label className="fileInput-create-avatar" htmlFor="fileInput">
 		  <img
           className="icon-nav profileAvatar"
