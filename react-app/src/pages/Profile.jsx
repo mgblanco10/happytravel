@@ -19,26 +19,28 @@ export default function Profile() {
     }
   }, [user.avatar]);
 
-  const handleImageChange = async (event) => {
+  const handleImageChange = (event) => {
     const newAvatar = event.target.files[0];
-    console.log('Nueva imagen seleccionada:', newAvatar); 
-    setAvatar(URL.createObjectURL(newAvatar)); 
-
+    console.log('Nueva imagen seleccionada:', newAvatar);
+    setAvatar(URL.createObjectURL(newAvatar));
+  
     const formData = new FormData();
     formData.append('avatar', newAvatar);
-	try {
-
-		await axios.post('http://localhost:8000/api/update-avatar', formData, {
-		  withCredentials: true,
-		  headers: {
-			'Content-Type': 'multipart/form-data', 
-		  },
-		});
-		console.log('Avatar subido con éxito');
-	  } catch (error) {
-		console.error('Error al subir el avatar:', error);
-	  }
-	};
+  
+    axios
+      .post('http://localhost:8000/api/update-avatar', formData, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then(() => {
+        console.log('Avatar subido con éxito');
+      })
+      .catch((error) => {
+        console.error('Error al subir el avatar:', error);
+      });
+  };
 	return (
 		<div className="container-profile">
 		  <img className="icon-nav profile" src={avatar} alt="icono perfil" />
