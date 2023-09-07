@@ -23,6 +23,10 @@ El objetivo central de esta mejora es evolucionar el proyecto monolítico existe
 - La arquitectura monolítica basada en el patrón MVC ha sido reemplazada por una API RESTful implementada en Laravel.
 - Se ha incorporado un sólido sistema de autenticación utilizando tokens, garantizando la seguridad de las interacciones entre los usuarios y la aplicación.
 - La funcionalidad CRUD (Crear, Leer, Actualizar, Eliminar) se ha rediseñado y reconfigurado en endpoints de la API, permitiendo una gestión más eficaz de los destinos.   
+- Se ha implementado el manejo de roles con las bibliotecas Sanctum y Spatie, optimizando la gestión de permisos y accesos.
+- Se ha priorizado la creación de un perfil de usuario como tarea de máxima prioridad, donde se puede cambiar la imagen del perfil.
+Esto garantiza un enfoque claro en las funcionalidades más importantes del sistema.
+- Aún en progreso el tema favoritos y la implementación de una galeria donde el usuario puede ver todo lo que el ha cargado y sus favoritos.
 <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
   
 
@@ -54,12 +58,43 @@ El objetivo central de esta mejora es evolucionar el proyecto monolítico existe
 <img src="https://res.cloudinary.com/postman/image/upload/t_team_logo/v1629869194/team/2893aede23f01bfcbd2319326bc96a6ed0524eba759745ed6d73405a3a8b67a8" alt="postman" width="40" height="40"/>
 <img src="https://spin.atomicobject.com/wp-content/uploads/insomnia.jpg" alt="insonnia" width="60" height="40"/>
 </div>
+### 🛠 Otros paquetes utilizados
+<div>
+<img src="https://miro.medium.com/v2/resize:fit:640/0*r3O0lVqhmhgql4Co.png" alt="Sanctum" width="60" height="40"/>
+<img src="https://spatie.be/images/og-image.jpg" alt="spatie" width="60" height="40"/>
+</div>
 
 ### Instrucciones de Uso
-Para utilizar esta nueva versión del proyecto, sigue las instrucciones detalladas en la documentación. 
-  <p align="center">
-   <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
-   </p>
+Para utilizar esta nueva versión del proyecto , sigue las instrucciones, para ejecutarlo necesitas tener conocimientos previos sobre como funciona Mamp/Xamp y tener instalado composer.
+
+**Instalación del Proyecto Backend Laravel**
+ 1. Clona el repositorio de Laravel desde GitHut
+ `https://github.com/mgblanco10/happytravel.git`
+ 2. Abre el proyecto en tu editor de código y en la terminal ingresa al directorio del proyecto
+ `cd laravel`
+ 3. Instala las dependencias de Composer
+ `composer install`
+ 4. Crea un archivo .env a partir del archivo .env.example.
+ 5. Configura tu base de datos en el archivo .env con la información adecuada, donde debes poner el nombre de tu base de datos previamente creada en mysql y tener claro cual es tu sistema operativo para la instalación.Ejemplo:
+ `DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nombre_base_de_datos
+DB_USERNAME=nombre_usuario
+DB_PASSWORD=contraseña`
+6. Ejecuta las migraciones para crear las tablas de la base de datos
+`php artisan migrate`
+  - Si deseas ya tener información en tu base de datos te recomendamos hacer uso de los seeders, para eso debes ejecutar el comando
+  `php artisan db:seed`
+7. Inicia el servidor de desarrollo
+`php artisan serve`
+
+**Instalación del Proyecto Frontend React**
+
+1. ingresa al directorio del proyecto
+ `cd react-app`
+2. 
+<img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
 
 
 ## Mockups
