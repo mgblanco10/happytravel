@@ -32,10 +32,8 @@ export default function EditForm() {
   }, [id]);
 
   const handleFileInputChange = (e) => {
-    // Manejar la selección de archivos aquí
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      // Realiza acciones con el archivo seleccionado aquí
       console.log('Archivo seleccionado:', selectedFile);
     }
   };

@@ -14,19 +14,22 @@ const CardsSearch = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    const fetchSearchResults = async () => {
-      try {
+    const fetchSearchResults = () => {
+      if (query) {
         const formattedQuery = query.toLowerCase().replace(/\s+/g, '');
-        const response = await axios.get(`http://localhost:8000/api/happy_travel?search=${formattedQuery}`);
-        const data = response.data;
-        setSearchResults(data);
-      } catch (error) {
-        console.error("Error fetching search results:", error);
+        axios
+          .get(`http://localhost:8000/api/happy_travel?search=${formattedQuery}`)
+          .then((response) => {
+            const data = response.data;
+            setSearchResults(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching search results:", error);
+          });
       }
     };
-    if (query) {
-      fetchSearchResults();
-    }
+  
+    fetchSearchResults();
   }, [query]);
 
   return (

@@ -1,22 +1,26 @@
 import axios from 'axios';
 
-export const deleteTravel = async (id) => {
+export const deleteTravel = (id) => {
   try {
-    const response = await axios.delete(`http://localhost:8000/api/happy_travel/${id}`, {
+    return axios.delete(`http://localhost:8000/api/happy_travel/${id}`, {
       withCredentials: true,
       headers: {
         "Accept": "application/json",
-        "Content-Type": "application/json",
       },
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .catch((error) => {
+      console.error('Error deleting travel:', error);
+      return false;
     });
-
-    if (response.status === 200) {
-      return true; 
-    } else {
-      return false; 
-    }
   } catch (error) {
     console.error('Error deleting travel:', error);
-    return false; 
+    return false;
   }
 };
