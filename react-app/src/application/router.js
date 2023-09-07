@@ -70,7 +70,7 @@ const router = createBrowserRouter([
 				element: <CreateUser />
 			},
 			{
-				path: '/editUser',
+				path: '/editUser/:userId',
 				element: <EditUser />
 			},
 		],

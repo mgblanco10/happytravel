@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ModelNotFoundException;
 
 class AuthController extends Controller {
-    
+
     public function register(RegisterRequest $request) {
 
         $data = $request->validated();
@@ -22,7 +22,7 @@ class AuthController extends Controller {
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-         $user->assignRole('User');
+        $user->assignRole('User');
         $token = $user->createToken('auth_token')->plainTextToken;
 
         $cookie = cookie('token', $token, 60 * 24); 

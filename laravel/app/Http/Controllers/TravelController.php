@@ -80,7 +80,7 @@ class TravelController extends Controller
          
         try {
             $user = Auth::user();
-            if (!$user->hasRole('Admin')) {
+            if (!$user->hasRole('Admin') && !$user->hasRole('SuperAdmin')) {
                 $travel = Travel::findOrFail($id);
     
                 if ($travel->user_id !== Auth::id()) {
@@ -101,7 +101,7 @@ class TravelController extends Controller
         try {
             $travel = Travel::findOrFail($id);
              $user = Auth::user();
-             if (!$user->hasRole('Admin')) {
+             if (!$user->hasRole('Admin') && !$user->hasRole('SuperAdmin')) {
                 $travel = Travel::findOrFail($id);
     
                 if ($travel->user_id !== Auth::id()) {
@@ -143,7 +143,7 @@ class TravelController extends Controller
         try {
             $travel = Travel::findOrFail($id);
             $user = Auth::user();
-            if (!$user->hasRole('Admin')) {
+            if (!$user->hasRole('Admin') && !$user->hasRole('SuperAdmin')) {
                 if ($travel->user_id !== Auth::id()) {
                     return response()->json(['success' => false, 'error' => 'No tienes permiso para eliminar este destino.'], 403);
                 }

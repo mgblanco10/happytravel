@@ -45,6 +45,7 @@ export default function CardsGuest({ user_id }) {
     <div>
       <div className="card">
         {travels.map((travel) => (
+<<<<<<< Updated upstream
           (!user_id || travel.user_id === user_id) ? (
             <div key={travel.id} className="cards" style={{ width: '18.75rem', height: '25rem' }}>
               {(user && hasRole('Admin')) || (user && user.id === travel.user_id) ? (
@@ -68,10 +69,32 @@ export default function CardsGuest({ user_id }) {
                       <img className="icon-cards-delete" src={deleteIcon} alt="icono de eliminar destino" />
                     </button>
                   </div>
+=======
+          <div  key={travel.id} className="cards" style={{ width: '18.75rem', height: '25rem' }}>
+                {(user && hasRole('Admin' && 'SuperAdmin')) || (user && user.id === travel.user_id) ? ( 
+            <Link to={`/details/${travel.id}`} className="card-link"> 
+            <img className="icon-info" src={infoIcon} alt="icono info" />
+            </Link>
+>>>>>>> Stashed changes
                 ) : null}
               </div>
+<<<<<<< Updated upstream
             </div>
           ) : null
+=======
+              {(user && hasRole('Admin' && 'SuperAdmin')) || (user && user.id === travel.user_id) ? ( 
+                <div>
+                  <Link to={`/edit/${travel.id}`} className="card-edit">
+                    <img className="icon-cards" src={editIcon} alt="icono de editar destino" />
+                  </Link>
+                  <button onClick={() => openDeleteModal(travel.id)} className="card-delete-button">
+                    <img className="icon-cards-delete" src={deleteIcon} alt="icono de eliminar destino" />
+                  </button>
+                </div>
+                ) : null}
+                </div>
+          </div>
+>>>>>>> Stashed changes
         ))}
       </div>
       <ModalAction
@@ -85,3 +108,96 @@ export default function CardsGuest({ user_id }) {
 
 
 
+<<<<<<< Updated upstream
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes

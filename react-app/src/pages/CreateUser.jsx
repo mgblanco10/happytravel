@@ -1,83 +1,171 @@
-import React from 'react';
-import axios from '../services/axios';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
-import { Navigate } from 'react-router-dom';
-import "../css/LoginRegister.css";
-import {  useNavigate } from 'react-router-dom';
 
-export default function CreateUser() {
-	const { setUser } = useAuth();
-	const [nameError, setNameError] = React.useState('');
-	const [emailError, setEmailError] = React.useState('');
-	const [passwordError, setPasswordError] = React.useState('');
-	const navigate = useNavigate();
+function CreateUser() {
+    const { user, hasRole } = useAuth();
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		const { name, email, password } = e.target.elements;
-		const body = {
-			name: name.value,
-			email: email.value,
-			password: password.value,
-		};
-		try {
-			const resp = await axios.post('/register', body);
-			if (resp.status === 200) {
-				setUser(resp.data.user);
-				return <Navigate to="/dashboard" />;
-			}
-		} catch (error) {
-			if (error.response.status === 422) {
-				console.log(error.response.data.errors);
-				if (error.response.data.errors.name) {
-					setNameError(error.response.data.errors.name[0]);
-				} else {
-					setNameError('');
-				}
-				if (error.response.data.errors.email) {
-					setEmailError(error.response.data.errors.email[0]);
-				} else {
-					setEmailError('');
-				}
-				if (error.response.data.errors.password) {
-					setPasswordError(error.response.data.errors.password[0]);
-				} else {
-					setPasswordError('');
-				}
-			}
-		}
-	};
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        roles: '',
+    });
 
-	return (
-		<div className="auth-form-container">
-	<form className="register-form" onSubmit={handleSubmit} action="#" method="POST"> 
-		<h2>Registro de Usuario</h2>
-		<hr className="divider" />
-		<label htmlFor="name">Nombre</label>
-		<input name="name" id="name" placeholder="Escribe tu nombre..." className="form-auth"/>
-		{nameError && (
-								<p>{nameError}</p>
-							)}
-		<label htmlFor="email">E-mail</label>
-		<input type="email" placeholder="Escribe tu correo..." id="email" className="form-auth" name="email" />
-		{emailError && (
-								<p className="text-sm text-red-600">{emailError}</p>
-							)}
-		<label htmlFor="password">Contraseña</label>
-		<input type="password" placeholder="Escribe tu contraseña..." id="password" className="form-auth" name="password" />
-		{passwordError && (
-								<p className="text-sm text-red-600">{passwordError}</p>
-							)}
-		<div className="container-btn">
-		<button type="submit" className="btn btn-primary">Aceptar</button>
-		<button type="button" className="btn btn-secondary" onClick={() => navigate('/')}>Cancelar</button>
-		</div>
-	</form>
-	<button className="link-btn" onClick={() => navigate('/login')}>
-Ya tiene cuenta? Accede aqui.
-</button>
+    const [errors, setErrors] = useState([]);
+    const [successMessage, setSuccessMessage] = useState('');
 
-</div>
-)
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
+    const handleRoleChange = (event) => {
+        const selectedRole = event.target.value;
+        setFormData({ ...formData, roles: selectedRole }); 
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        
+        axios
+            .post('http://localhost:8000/api/users', formData, {
+                withCredentials: true,
+                headers: {
+                  "Accept": "application/json",
+                  "Content-Type": "application/json",
+                },
+              })
+            .then((response) => {
+                setSuccessMessage('User created successfully.');
+                setErrors([]);
+            })
+            .catch((error) => {
+                if (error.response && error.response.data && error.response.data.errors) {
+                    setErrors(Object.values(error.response.data.errors).flat());
+                } else {
+                    setErrors(['An error occurred while creating the user.']);
+                }
+            });
+    };
+
+
+    return (
+        <div>
+        {user && hasRole('SuperAdmin') && (
+                    <>
+            <div className="row">
+                <div className="col-lg-12 margin-tb">
+                    <div className="pull-left">
+                        <h2>Crear Nuevo Usuario</h2>
+                    </div>
+                    <div className="pull-right">
+                        <a className="btn btn-primary" href="/admin">Volver</a>
+                    </div>
+                </div>
+            </div>
+
+            {errors.length > 0 && (
+                <div className="alert alert-danger">
+                    <strong>Whoops!</strong> Hay algunas problemas con tu input.<br />
+                    <ul>
+                        {errors.map((error, index) => (
+                            <li key={index}>{error}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
+            {successMessage && (
+                <div className="alert alert-success">{successMessage}</div>
+            )}
+
+            <form onSubmit={handleSubmit}>
+                <div className="row">
+                    <div className="col-xs-12 col-sm-12 col-md-12">
+                        <div className="form-group">
+                            <strong>Nombre:</strong>
+                            <input
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleInputChange}
+                                className="form-control"
+                            />
+                        </div>
+                    </div>
+                    <div className="col-xs-12 col-sm-12 col-md-12">
+                        <div className="form-group">
+                            <strong>Email:</strong>
+                            <input
+                                type="text"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                className="form-control"
+                            />
+                        </div>
+                    </div>
+                    <div className="col-xs-12 col-sm-12 col-md-12">
+                        <div className="form-group">
+                            <strong>Contraseña:</strong>
+                            <input
+                                type="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleInputChange}
+                                className="form-control"
+                            />
+                        </div>
+                    </div>
+                    <div className="col-xs-12 col-sm-12 col-md-12">
+                        <div className="form-group">
+                           
+                            <strong>Roles:</strong><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="roles"
+                                    value="SuperAdmin"
+                                    onChange={handleRoleChange}
+                                />
+                                SuperAdmin
+                            </label><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="roles"
+                                    value="Admin"
+                                    onChange={handleRoleChange}
+                                />
+                                Admin
+                            </label><br />
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="roles"
+                                    value="User"
+                                    onChange={handleRoleChange}
+                                />
+                                User
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <button type="submit" className="btn btn-primary">
+                            Crear
+                        </button>
+                    </div>
+                </div>
+            </form>
+                        </>
+                        )}
+                        {!user || !hasRole('SuperAdmin') && (
+                    <>       <p style={{ fontSize: '28px', textAlign: 'center' }}>Oops! Parece que no tienes acceso a esta página. 😢</p>             </> 
+                    
+                    )}
+        </div>
+    );
 }
+
+export default CreateUser;

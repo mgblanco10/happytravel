@@ -39,6 +39,7 @@ class RoleAndPermissionSeeder extends Seeder
             'create-travels',
             'edit-travels',
             'delete-travels',
+            'like-travels',
         ]);
 
         $userRole->givePermissionTo([
@@ -47,13 +48,5 @@ class RoleAndPermissionSeeder extends Seeder
             'delete-travels',
             'like-travels',
         ]);
-
-        $user = User::create([
-            'name' => 'Super Admin', 
-            'email' => 'superadmin@gmail.com',
-            'password' => bcrypt('123456')
-        ]);
-        
-
     }
 }

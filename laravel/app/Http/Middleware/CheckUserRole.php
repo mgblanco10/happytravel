@@ -11,7 +11,10 @@ class CheckUserRole
     {
         
         if (Auth::check()) {
-            if (Auth::user()->hasRole('User') || Auth::user()->hasRole('Admin')) {
+            if (Auth::user()->hasRole('User') || Auth::user()->hasRole('Admin'))  {
+                return $next($request);
+            }
+            if (Auth::user()->hasRole('SuperAdmin'))  {
                 return $next($request);
             }
         }
