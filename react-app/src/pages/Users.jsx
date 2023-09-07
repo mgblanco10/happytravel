@@ -5,7 +5,6 @@ function UserList() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        // Fetch users from your Laravel API using Axios
         axios.get('/api/users')
             .then((response) => {
                 setUsers(response.data);
