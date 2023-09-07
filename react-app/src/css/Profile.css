@@ -9,6 +9,7 @@
   .profile {
     width: 200px; 
     margin-bottom: -80px; 
+    border-radius: 100px;
   }
   .profileAvatar{
     width: 70px;
@@ -35,5 +36,20 @@
 
   .info-perfil span{
     color: black;
+  }
+
+  @media (max-width: 768px) {
+    .profile{
+      width: 150px;
+    }
+
+    .profileAvatar{
+      width: 50px;
+      margin-top: 10px;
+    }
+
+    .info-perfil{
+      font-size: 16px;
+    }
   }
   

@@ -14,7 +14,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (user.avatar) {
-      setAvatar(`http://localhost:8000/uploads/${user.avatar}`);
+      setAvatar(`http://localhost:8000/uploads/${user.avatars}`);
       localStorage.setItem('avatar', `http://localhost:8000/uploads/${user.avatar}`);
     } else {
       setAvatar(avatarIcon); 
@@ -68,7 +68,6 @@ export default function Profile() {
 	  <div className="info-perfil">
         Email: <span>{user.email}</span>
       </div>
-
       <ViewOptions viewOption={viewOption} onViewOptionChange={changeView} />
 	  </div>
   );

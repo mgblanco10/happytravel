@@ -8,7 +8,7 @@ const ViewOptions = ({ viewOption, onViewOptionChange }) => {
         className={`view-option-btn ${viewOption === 'favorites' ? 'active' : ''}`}
         onClick={() => onViewOptionChange('favorites')}
       >
-        Favoritos
+        Mis favoritos
       </button>
       <button
         className={`view-option-btn ${viewOption === 'userAdded' ? 'active' : ''}`}
