@@ -38,7 +38,6 @@
     color: black;
   }
 
-<<<<<<< HEAD
   @media (max-width: 768px) {
     .profile{
       width: 150px;
@@ -52,11 +51,9 @@
     .info-perfil{
       font-size: 16px;
     }
-=======
   .container-card-profile{
     width: 100%;
     display: flex;
     flex-direction: column;
->>>>>>> ac3fdec71265f776159b3093b98fe92a6f89b341
   }
-  
+ }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "../css/CreateForm.css";
-import Imgfile from "../assets/file-icon.svg"
 import { Navigate } from 'react-router-dom';
 
 export default function CreateForm() {
@@ -10,16 +9,6 @@ export default function CreateForm() {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
     const [redirectToDashboard, setRedirectToDashboard] = useState(false); 
-  
-    // const handleFileInputChange = (e) => {
-    //   // Manejar la selección de archivos aquí
-    //   const selectedFile = e.target.files[0];
-    //   if (selectedFile) {
-    //     // Realiza acciones con el archivo seleccionado aquí
-    //     console.log('Archivo seleccionado:', selectedFile);
-    //   }
-    // };
-
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -72,7 +61,7 @@ export default function CreateForm() {
           </div>
           
           
-          <div className="add-file">
+          {/* <div className="add-file">
                         <label className="form-label">Imagen</label>
                         <div className="input-group">
                             <label className="input-group-text" htmlFor="fileInput">
@@ -82,7 +71,21 @@ export default function CreateForm() {
                         </div>
                         
                         <p id="error-image" className="error"></p>
-                    </div>
+            </div> */}
+            <label for="image" class="input-absolute">
+                    Imagen
+                    <img class="file" src="{{ asset('assets/File-icon.svg') }}" alt="Elegir file"/>
+
+                    <input id="image" type="file" name="image" />
+
+                </label>
+
+                <div class="file-text" id="file-text">
+
+                    Sube una imagen...
+
+                </div>
+
           
         </div>
 

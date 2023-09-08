@@ -51,12 +51,12 @@ function UserList() {
         }
     };
     return (
-        <div>
+        <div className='full-container-form form-admin users'>
         {user && hasRole('SuperAdmin') && (
                     <>
                         <h1>Lista de Usuarios</h1>
                         <a href="/createUser"><img className="icon-nav" src={createIcon} alt="icono de agregar destino" /></a>
-                        <table className="table table-bordered">
+                        <table >
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -78,8 +78,8 @@ function UserList() {
                                             ))}
                                         </td>
                                         <td>
-                                            <button className="link-btn" onClick={() => navigate(`/editUser/${user.id}`)}><img className="icon-delete" src={editIcon} alt="icono borrar" /></button>  
-                                            <button onClick={() => deleteUser(user.id)}><img className="icon-delete" src={deleteIcon} alt="icono borrar" /></button>                            
+                                            <a onClick={() => navigate(`/editUser/${user.id}`)}><img className="icon-delete" src={editIcon} alt="icono borrar" /></a>  
+                                            <a onClick={() => deleteUser(user.id)}><img className="icon-delete" src={deleteIcon} alt="icono borrar" /></a>                            
                                         </td>
                                     </tr>
                                 ))}
