@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import "../css/CreateForm.css";
 
 function EditUser() {
     const { user, hasRole } = useAuth();
@@ -79,16 +80,13 @@ function EditUser() {
             
     };
     return (
-        <div>
+        <div className='full-container-form form-admin'>
             {user && hasRole('SuperAdmin') && (
                     <>
             <div className="row">
                 <div className="col-lg-12 margin-tb">
                     <div className="pull-left">
                         <h2>Editar Usuario</h2>
-                    </div>
-                    <div className="pull-right">
-                        <a className="btn btn-primary" style={{ fontSize: '1.1em', marginLeft: '0' }} href="/admin">Volver</a>
                     </div>
                 </div>
             </div>
@@ -112,7 +110,7 @@ function EditUser() {
                 <div className="row">
                     <div className="col-xs-12 col-sm-12 col-md-12">
                         <div className="form-group">
-                            <strong>Nombre:</strong>
+                            <strong>Nombre:</strong><br />
                             <input
                                 type="text"
                                 name="name"
@@ -124,7 +122,7 @@ function EditUser() {
                     </div>
                     <div className="col-xs-12 col-sm-12 col-md-12">
                         <div className="form-group">
-                            <strong>Email:</strong>
+                            <strong>Email:</strong><br />
                             <input
                                 type="text"
                                 name="email"
@@ -136,7 +134,7 @@ function EditUser() {
                     </div>
                     <div className="col-xs-12 col-sm-12 col-md-12">
                         <div className="form-group">
-                            <strong>Contraseña:</strong>
+                            <strong>Contraseña:</strong><br />
                             <input
                                 type="password"
                                 name="password"
@@ -183,10 +181,11 @@ function EditUser() {
                         </label>
                         </div>
                     </div>
-                    <div className="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <div className="text-center buttons-admin">
                         <button type="submit" className="btn btn-primary" style={{ fontSize: '1.1em', marginLeft: '0' }}>
                             Aceptar
                         </button>
+                        <a className="btn btn-primary button-cancel" style={{ fontSize: '1.1em', marginLeft: '0' }} href="/admin">Cancelar</a>
                     </div>
                 </div>
             </form>

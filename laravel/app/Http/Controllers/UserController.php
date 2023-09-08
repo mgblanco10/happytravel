@@ -61,13 +61,6 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
     }
     
-    // $token = $user->createToken('auth_token')->plainTextToken;
-
-    // $cookie = cookie('token', $token, 60 * 24);
-
-    // return response()->json([
-    //     'user' => $user,
-    // ])->withCookie($cookie);
     return response()->json([
         'user' => $user,
         'message' => 'User created successfully',

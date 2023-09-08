@@ -8,7 +8,33 @@
     width: 60%;
     color: var(--font-color);
 }
-
+.form-admin{
+    text-align: center;
+}
+.buttons-admin{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    padding-top: 1em;
+}
+table{
+    width: 100%;
+}
+a.button-cancel{
+    background-color: var(--pink-button);
+}
+input[type="radio"]:first-child{
+    margin-left: 1em;
+    margin-right: 0.2em;
+}
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+div.users{
+    width: 70%;
+}
 h3{
     font-weight: 700;
     display: flex;
@@ -169,7 +195,6 @@ h3{
     border-radius: 20px 0px 0px 20px;
 
 }
-
 
 
 @media (max-width: 768px) {

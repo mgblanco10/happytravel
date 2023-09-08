@@ -51,16 +51,13 @@ function CreateUser() {
 
 
     return (
-        <div>
+        <div className='full-container-form form-admin'>
         {user && hasRole('SuperAdmin') && (
                     <>
             <div className="row">
                 <div className="col-lg-12 margin-tb">
                     <div className="pull-left">
                         <h2>Crear Nuevo Usuario</h2>
-                    </div>
-                    <div className="pull-right">
-                        <a className="btn btn-primary" style={{ fontSize: '1.1em', marginLeft: '0' }} href="/admin">Volver</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +81,7 @@ function CreateUser() {
                 <div className="row">
                     <div className="col-xs-12 col-sm-12 col-md-12">
                         <div className="form-group">
-                            <strong>Nombre:</strong>
+                            <strong>Nombre:</strong><br />
                             <input
                                 type="text"
                                 name="name"
@@ -96,7 +93,7 @@ function CreateUser() {
                     </div>
                     <div className="col-xs-12 col-sm-12 col-md-12">
                         <div className="form-group">
-                            <strong>Email:</strong>
+                            <strong>Email:</strong><br />
                             <input
                                 type="text"
                                 name="email"
@@ -108,7 +105,7 @@ function CreateUser() {
                     </div>
                     <div className="col-xs-12 col-sm-12 col-md-12">
                         <div className="form-group">
-                            <strong>Contraseña:</strong>
+                            <strong>Contraseña:</strong><br />
                             <input
                                 type="password"
                                 name="password"
@@ -130,7 +127,7 @@ function CreateUser() {
                                     onChange={handleRoleChange}
                                 />
                                 SuperAdmin
-                            </label><br />
+                            </label>
                             <label>
                                 <input
                                     type="radio"
@@ -139,7 +136,7 @@ function CreateUser() {
                                     onChange={handleRoleChange}
                                 />
                                 Admin
-                            </label><br />
+                            </label>
                             <label>
                                 <input
                                     type="radio"
@@ -151,10 +148,12 @@ function CreateUser() {
                             </label>
                         </div>
                     </div>
-                    <div className="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <div className=" text-center buttons-admin">
                         <button type="submit" className="btn btn-primary" style={{ fontSize: '1.1em', marginLeft: '0' }}>
                             Crear
                         </button>
+                        <a className="btn btn-primary button-cancel" style={{ fontSize: '1.1em', marginLeft: '0' }} href="/admin">Cancelar</a>
+
                     </div>
                 </div>
             </form>
