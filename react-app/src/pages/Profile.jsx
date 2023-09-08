@@ -14,17 +14,9 @@ export default function Profile() {
   const [avatar, setAvatar] = useState(avatarIcon);  const navigate = useNavigate();
   const [viewOption, setViewOption] = useState("favorites");
   useEffect(() => {
-<<<<<<< HEAD
-    if (user.avatar) {
-      setAvatar(`http://localhost:8000/uploads/${user.avatars}`);
-      localStorage.setItem('avatar', `http://localhost:8000/uploads/${user.avatar}`);
-    } else {
-      setAvatar(avatarIcon); 
-=======
     if (user.image) {
       // setAvatar(`http://localhost:8000/uploads/${user.image}`);
       setAvatar(`http://localhost:8000/storage/avatars/${user.image}`);
->>>>>>> ac3fdec71265f776159b3093b98fe92a6f89b341
     }
   }, [user.image]);
 
@@ -75,10 +67,7 @@ export default function Profile() {
       <div className="info-perfil">
         Email: <span>{user.email}</span>
       </div>
-<<<<<<< HEAD
-=======
 	  {hasRole('SuperAdmin') && ( <><button type="button" className="btn btn-primary" style={{ fontSize: '1.1em', marginLeft: '0' }} onClick={() => navigate('/admin')}>Usuarios</button></> )}
->>>>>>> ac3fdec71265f776159b3093b98fe92a6f89b341
       <ViewOptions viewOption={viewOption} onViewOptionChange={changeView} />
       <div className="container-card-profile">
         <CardsGuest user_id={user.id} />
