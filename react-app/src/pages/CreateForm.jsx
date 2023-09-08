@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "../css/CreateForm.css";
 import { Navigate } from 'react-router-dom';
+import Imgadd from '../assets/file-icon.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateForm() {
     const [name, setName] = useState('');
@@ -9,6 +11,7 @@ export default function CreateForm() {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
     const [redirectToDashboard, setRedirectToDashboard] = useState(false); 
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -59,34 +62,24 @@ export default function CreateForm() {
             <input id="location" className="form-control" type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
             <p id="error-location" className="error"></p>
           </div>
-          
-          
-          {/* <div className="add-file">
-                        <label className="form-label">Imagen</label>
-                        <div className="input-group">
-                            <label className="input-group-text" htmlFor="fileInput">
-                                 <input className="form-control-input" type="file" onChange={(e) => setImage(e.target.files[0])} />
-                            </label>
-                            <input className="form-control-input"   onChange={(e) => setImage(e.target.files[0])} />
-                        </div>
-                        
-                        <p id="error-image" className="error"></p>
-            </div> */}
-            <label for="image" class="input-absolute">
-                    Imagen
-                    <img class="file" src="{{ asset('assets/File-icon.svg') }}" alt="Elegir file"/>
-
-                    <input id="image" type="file" name="image" />
-
+          <div className="input-group">
+                <label className="input-group-text" htmlFor="fileInput">
+                  <img
+                    className="img_add"
+                    src={Imgadd}
+                    alt="Icono de carpeta"
+                    width="30"
+                    height="30"
+                    // onClick={() => document.getElementById('fileInput').click()}
+                  />     
+                  <input
+                    type="file"
+                    id="fileInput"
+                    accept="image/*"
+                    onChange={(e) => setImage(e.target.files[0])}                  />         
                 </label>
-
-                <div class="file-text" id="file-text">
-
-                    Sube una imagen...
-
-                </div>
-
-          
+                <input type="text" className="form-control shadow-top blue-background" placeholder="Sube una imagen" readOnly />
+              </div>        
         </div>
 
         <div className="columna2">
@@ -99,7 +92,9 @@ export default function CreateForm() {
       <div className="btn-container">
      
         <button className="btn-primary" type="submit">Aceptar</button>
-        <button className="btn-secondary">Cancelar</button>
+        <button type="button" className="btn btn-secondary" onClick={() => navigate('/')}>
+            Cancelar
+          </button>
       </div>
     </form>
 
