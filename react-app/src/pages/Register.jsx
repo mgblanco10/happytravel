@@ -86,10 +86,25 @@ import axios from '../services/axios';
 import { useAuth } from '../contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import '../css/LoginRegister.css';
 
 export default function Register() {
+  const notify = () => {
+    toast.success('Registro completado!', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
+  }
+
   const { setUser } = useAuth();
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -158,7 +173,7 @@ export default function Register() {
         <input type="password" placeholder="Escribe tu contraseña..." id="password" className="form-auth" name="password" />
         {passwordError && <p className="text-sm text-red-600">{passwordError}</p>}
         <div className="container-btn">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" onClick={notify}>
             Aceptar
           </button>
           <button type="button" className="btn btn-secondary" onClick={() => navigate('/')}>
@@ -175,6 +190,7 @@ export default function Register() {
           {notificationMessage}
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }

@@ -3,6 +3,8 @@ import axios from 'axios';
 import "../css/CreateForm.css";
 import Imgfile from "../assets/file-icon.svg"
 import { Navigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function CreateForm() {
     const [name, setName] = useState('');
@@ -10,16 +12,6 @@ export default function CreateForm() {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);
     const [redirectToDashboard, setRedirectToDashboard] = useState(false); 
-  
-    // const handleFileInputChange = (e) => {
-    //   // Manejar la selección de archivos aquí
-    //   const selectedFile = e.target.files[0];
-    //   if (selectedFile) {
-    //     // Realiza acciones con el archivo seleccionado aquí
-    //     console.log('Archivo seleccionado:', selectedFile);
-    //   }
-    // };
-
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -39,6 +31,8 @@ export default function CreateForm() {
           },
         });
         console.log('Response:', response.data);
+        toast.success('Destino agregado: ' + name);
+
     
         setName('');
         setLocation('');

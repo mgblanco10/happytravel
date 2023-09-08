@@ -3,6 +3,8 @@ import { useAuth } from '../contexts/AuthContext';
 import "../css/Profile.css";
 import axios from 'axios'; 
 import ViewOptions from './ViewOptions';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import avatarIcon from '../assets/avatar-icon.svg';
 import createIcon from '../assets/create-icon.svg';
@@ -38,9 +40,11 @@ export default function Profile() {
       })
       .then(() => {
         console.log('Avatar subido con éxito');
+        toast.success('Avatar subido con éxito');
       })
       .catch((error) => {
         console.error('Error al subir el avatar:', error);
+        toast.error('Error al subir el avatar');
       });
   };
 
@@ -48,27 +52,28 @@ export default function Profile() {
     setViewOption(option);
   };
 
-	return (
-		<div className="container-profile">
-		  <img className="icon-nav profile" src={avatar} alt="icono perfil" />
-		  <label className="fileInput-create-avatar" htmlFor="fileInput">
-		  <img
+  return (
+    <div className="container-profile">
+      <img className="icon-nav profile" src={avatar} alt="icono perfil" />
+      <label className="fileInput-create-avatar" htmlFor="fileInput">
+        <img
           className="icon-nav profileAvatar"
           src={createIcon}
           alt="icono de agregar fotografía"
         />
-		<input
+        <input
           id="fileInput"
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-		  />
+        />
       </label>
       <h2 className="info-perfil title-profile">{user.name}</h2>
-	  <div className="info-perfil">
+      <div className="info-perfil">
         Email: <span>{user.email}</span>
       </div>
       <ViewOptions viewOption={viewOption} onViewOptionChange={changeView} />
-	  </div>
+      <ToastContainer />
+    </div>
   );
 }
