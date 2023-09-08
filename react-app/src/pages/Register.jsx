@@ -51,7 +51,7 @@ export default function Register() {
           setNotificationMessage('');
         }, 3000);
 
-        return <Navigate to="/dashboard" />;
+        return <Navigate to="/profile" />;
       }
     } catch (error) {
       if (error.response.status === 422) {

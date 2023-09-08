@@ -28,7 +28,7 @@ export default function Login() {
 					position: "top-right",
 					autoClose: 3000,
 				  });
-				return <Navigate to="/dashboard" />;
+				return <Navigate to="/profile" />;
 
 
 			}

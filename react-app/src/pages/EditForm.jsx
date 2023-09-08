@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import "../css/CreateForm.css";
-import axios from 'axios';
 import Imgadd from '../assets/file-icon.svg';
 import { useParams, Navigate  } from 'react-router-dom';
 import { fetchCardDetails } from '../services/ApiGetCardDetails'

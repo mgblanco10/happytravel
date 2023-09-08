@@ -48,7 +48,7 @@ export default function CreateForm() {
     };
     
     if (redirectToDashboard) {
-      return <Navigate to="/dashboard" />;
+      return <Navigate to="/profile" />;
   }
 
     return (
