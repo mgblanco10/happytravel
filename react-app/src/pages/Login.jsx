@@ -3,6 +3,9 @@ import { Navigate } from 'react-router-dom';
 import axios from '../services/axios';
 import { useAuth } from '../contexts/AuthContext';
 import {  useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Login() {
 	const { setUser, csrfToken } = useAuth();
@@ -21,7 +24,12 @@ export default function Login() {
 			const resp = await axios.post('/login', body);
 			if (resp.status === 200) {
 				setUser(resp.data.user);
+				toast.success(`¡Bienvenido, ${resp.data.user.name}!`, {
+					position: "top-right",
+					autoClose: 3000,
+				  });
 				return <Navigate to="/dashboard" />;
+
 
 			}
 		} catch (error) {
