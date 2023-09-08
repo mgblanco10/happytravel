@@ -4,6 +4,8 @@ import "../css/CreateForm.css";
 import { Navigate } from 'react-router-dom';
 import Imgadd from '../assets/file-icon.svg';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function CreateForm() {
     const [name, setName] = useState('');
@@ -31,6 +33,8 @@ export default function CreateForm() {
           },
         });
         console.log('Response:', response.data);
+        toast.success('Destino agregado: ' + name);
+
     
         setName('');
         setLocation('');

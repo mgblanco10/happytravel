@@ -8,6 +8,9 @@ import createIcon from "../assets/create-icon.svg";
 import CardsGuest from "../components/CardsGuest";
 import {  useNavigate } from 'react-router-dom';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Profile() {
   const { user, hasRole } = useAuth();
@@ -15,7 +18,6 @@ export default function Profile() {
   const [viewOption, setViewOption] = useState("favorites");
   useEffect(() => {
     if (user.image) {
-      // setAvatar(`http://localhost:8000/uploads/${user.image}`);
       setAvatar(`http://localhost:8000/storage/avatars/${user.image}`);
     }
   }, [user.image]);
@@ -36,10 +38,12 @@ export default function Profile() {
         },
       })
       .then(() => {
-        console.log("Avatar subido con éxito");
+        console.log('Avatar subido con éxito');
+        toast.success('Avatar subido con éxito');
       })
       .catch((error) => {
-        console.error("Error al subir el avatar:", error);
+        console.error('Error al subir el avatar:', error);
+        toast.error('Error al subir el avatar');
       });
   };
 
@@ -72,11 +76,7 @@ export default function Profile() {
       <div className="container-card-profile">
         <CardsGuest user_id={user.id} />
       </div>
+      <ToastContainer />
     	  </div>
   );
-}
-
-{
-  /* <img className="icon-nav profile" src={`http://localhost:8000/storage/avatars/1694076757_covers.jpg`} alt="icono perfil" />
-<img className="icon-nav profile" src={`http://localhost:8000/storage/avatars/${user.image}`} alt="icono perfil" /> */
 }

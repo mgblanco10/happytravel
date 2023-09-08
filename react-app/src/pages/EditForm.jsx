@@ -6,6 +6,8 @@ import { useParams, Navigate  } from 'react-router-dom';
 import { fetchCardDetails } from '../services/ApiGetCardDetails'
 import {editCard} from '../services/ApiEditTravel'
 import {  useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function EditForm() {
   const { id } = useParams();
@@ -52,6 +54,8 @@ export default function EditForm() {
       console.log('Solicitud PUT enviada');
       console.log('Datos del formulario:', formData);
       console.log('Respuesta del servidor:', response);
+
+      toast.success('Destino editado: ' + name);
 
       setName(response.name);
       setLocation(response.location);
@@ -115,10 +119,11 @@ if (redirectToDashboard) {
       </div>
       <div className="btn-container">
      
-            <button className="btn-primary" type="submit">Aceptar</button>
+        <button className="btn-primary" type="submit">Aceptar</button>
          
         <button className="btn-secondary" type="button" onClick={() => navigate('/dashboard')}>Cancelar</button>
       </div>
+      <ToastContainer />
     </form>
   );
 }
