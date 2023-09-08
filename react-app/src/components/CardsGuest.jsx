@@ -8,6 +8,7 @@ import infoIcon from '../assets/Info.svg';
 import { useAuth } from '../contexts/AuthContext';
 import { deleteTravel } from '../services/ApiDeleteTravel'; 
 import ModalAction from './Modal'; 
+import favIcon from "../assets/fav.svg"
 
 export default function CardsGuest() {
   const [travels, setTravels] = useState([]);
@@ -59,9 +60,14 @@ export default function CardsGuest() {
               </div>
               {user && (
                 <div>
+                    <button onClick={() => handleAddToFavorites(travel.id)} className="card-fav-button">
+                      <img className="icon-cards-fav" src={favIcon} alt="icono para guardar en favoritos un destino" />
+                    </button>
+
                   <Link to={`/edit/${travel.id}`} className="card-edit">
                     <img className="icon-cards" src={editIcon} alt="icono de editar destino" />
                   </Link>
+
                   <button onClick={() => openDeleteModal(travel.id)} className="card-delete-button">
                     <img className="icon-cards-delete" src={deleteIcon} alt="icono de eliminar destino" />
                   </button>

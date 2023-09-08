@@ -84,6 +84,14 @@
     padding: 5px;
   }
   .icon-cards-delete{
+    width: 30px;
+    padding: 5px;
+  }
+  .card-fav-button{
+    background-color: transparent;
+    padding: 5px;
+  }
+  .icon-cards-fav{
     width: 35px;
     padding: 5px;
   }

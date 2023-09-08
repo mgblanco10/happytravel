@@ -1,5 +1,7 @@
 import React from 'react';
+import Fav from '../components/FavList';
 import { useAuth } from '../contexts/AuthContext';
+import FavList from '../components/FavList';
 
 export default function Profile() {
 	const { user } = useAuth();
@@ -12,7 +14,15 @@ export default function Profile() {
 				<div>
 				Email: {user.email}
 				</div>
+
+				<div>
+					<h3>Favoritos</h3>
+					<FavList/>
+				</div>
 				
 		</>
+		
+		
+	
 	);
 }
