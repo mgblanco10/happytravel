@@ -1,46 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
 import "../css/Profile.css";
-import axios from 'axios'; 
-import ViewOptions from './ViewOptions';
+import axios from "axios";
+import ViewOptions from "./ViewOptions";
+import avatarIcon from "../assets/avatar-icon.svg";
+import createIcon from "../assets/create-icon.svg";
+import CardsGuest from "../components/CardsGuest";
+import {  useNavigate } from 'react-router-dom';
 
-import avatarIcon from '../assets/avatar-icon.svg';
-import createIcon from '../assets/create-icon.svg';
 
 export default function Profile() {
-  const { user } = useAuth();
-  const [avatar, setAvatar] = useState(localStorage.getItem('avatar') || avatarIcon);
-  const [viewOption, setViewOption] = useState('favorites');
-
+  const { user, hasRole } = useAuth();
+  const [avatar, setAvatar] = useState(avatarIcon);  const navigate = useNavigate();
+  const [viewOption, setViewOption] = useState("favorites");
   useEffect(() => {
+<<<<<<< HEAD
     if (user.avatar) {
       setAvatar(`http://localhost:8000/uploads/${user.avatars}`);
       localStorage.setItem('avatar', `http://localhost:8000/uploads/${user.avatar}`);
     } else {
       setAvatar(avatarIcon); 
+=======
+    if (user.image) {
+      // setAvatar(`http://localhost:8000/uploads/${user.image}`);
+      setAvatar(`http://localhost:8000/storage/avatars/${user.image}`);
+>>>>>>> ac3fdec71265f776159b3093b98fe92a6f89b341
     }
-  }, [user.avatar]);
+  }, [user.image]);
 
   const handleImageChange = (event) => {
     const newAvatar = event.target.files[0];
-    console.log('Nueva imagen seleccionada:', newAvatar);
+    console.log("Nueva imagen seleccionada:", newAvatar);
     setAvatar(URL.createObjectURL(newAvatar));
-  
+
     const formData = new FormData();
-    formData.append('avatar', newAvatar);
-  
+    formData.append("image", newAvatar);
+
     axios
-      .post('http://localhost:8000/api/update-avatar', formData, {
+      .post("http://localhost:8000/api/update-avatar", formData, {
         withCredentials: true,
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       })
       .then(() => {
-        console.log('Avatar subido con éxito');
+        console.log("Avatar subido con éxito");
       })
       .catch((error) => {
-        console.error('Error al subir el avatar:', error);
+        console.error("Error al subir el avatar:", error);
       });
   };
 
@@ -48,27 +55,39 @@ export default function Profile() {
     setViewOption(option);
   };
 
-	return (
-		<div className="container-profile">
-		  <img className="icon-nav profile" src={avatar} alt="icono perfil" />
-		  <label className="fileInput-create-avatar" htmlFor="fileInput">
-		  <img
+  return (
+    <div className="container-profile">
+      <img className="icon-nav profile" src={avatar} alt="icono perfil" />
+      <label className="fileInput-create-avatar" htmlFor="fileInput">
+        <img
           className="icon-nav profileAvatar"
           src={createIcon}
           alt="icono de agregar fotografía"
         />
-		<input
+        <input
           id="fileInput"
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-		  />
+        />
       </label>
       <h2 className="info-perfil title-profile">{user.name}</h2>
-	  <div className="info-perfil">
+      <div className="info-perfil">
         Email: <span>{user.email}</span>
       </div>
+<<<<<<< HEAD
+=======
+	  {hasRole('SuperAdmin') && ( <><button type="button" className="btn btn-primary" style={{ fontSize: '1.1em', marginLeft: '0' }} onClick={() => navigate('/admin')}>Usuarios</button></> )}
+>>>>>>> ac3fdec71265f776159b3093b98fe92a6f89b341
       <ViewOptions viewOption={viewOption} onViewOptionChange={changeView} />
-	  </div>
+      <div className="container-card-profile">
+        <CardsGuest user_id={user.id} />
+      </div>
+    	  </div>
   );
+}
+
+{
+  /* <img className="icon-nav profile" src={`http://localhost:8000/storage/avatars/1694076757_covers.jpg`} alt="icono perfil" />
+<img className="icon-nav profile" src={`http://localhost:8000/storage/avatars/${user.image}`} alt="icono perfil" /> */
 }
