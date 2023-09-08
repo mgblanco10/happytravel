@@ -88,7 +88,7 @@ function EditUser() {
                         <h2>Editar Usuario</h2>
                     </div>
                     <div className="pull-right">
-                        <a className="btn btn-primary" href="/admin">Volver</a>
+                        <a className="btn btn-primary" style={{ fontSize: '1.1em', marginLeft: '0' }} href="/admin">Volver</a>
                     </div>
                 </div>
             </div>
@@ -184,7 +184,7 @@ function EditUser() {
                         </div>
                     </div>
                     <div className="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" className="btn btn-primary" style={{ fontSize: '1.1em', marginLeft: '0' }}>
                             Aceptar
                         </button>
                     </div>

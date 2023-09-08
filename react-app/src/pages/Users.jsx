@@ -13,9 +13,6 @@ function UserList() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-<<<<<<< Updated upstream
-        axios.get('/api/users')
-=======
         axios.get('http://localhost:8000/api/users', {
             withCredentials: true,
             headers: {
@@ -39,7 +36,6 @@ function UserList() {
                     "Accept": "application/json",
                 },
             })
->>>>>>> Stashed changes
             .then((response) => {
                 if (response.status === 200) {
                     setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));

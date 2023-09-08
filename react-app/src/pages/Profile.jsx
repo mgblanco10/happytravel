@@ -1,30 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import "../css/Profile.css";
-<<<<<<< Updated upstream
 import axios from "axios";
 import ViewOptions from "./ViewOptions";
-
 import avatarIcon from "../assets/avatar-icon.svg";
 import createIcon from "../assets/create-icon.svg";
 import CardsGuest from "../components/CardsGuest";
-
-export default function Profile() {
-  const { user } = useAuth();
-  const [avatar, setAvatar] = useState(avatarIcon);
-  const [viewOption, setViewOption] = useState("favorites");
-=======
-import axios from 'axios'; 
-import avatarIcon from '../assets/avatar-icon.svg';
-import createIcon from '../assets/create-icon.svg';
 import {  useNavigate } from 'react-router-dom';
+
 
 export default function Profile() {
   const { user, hasRole } = useAuth();
-  const [avatar, setAvatar] = useState(localStorage.getItem('avatar') || avatarIcon);
-  const navigate = useNavigate();
->>>>>>> Stashed changes
-
+  const [avatar, setAvatar] = useState(avatarIcon);  const navigate = useNavigate();
+  const [viewOption, setViewOption] = useState("favorites");
   useEffect(() => {
     if (user.image) {
       // setAvatar(`http://localhost:8000/uploads/${user.image}`);
@@ -79,19 +67,12 @@ export default function Profile() {
       <div className="info-perfil">
         Email: <span>{user.email}</span>
       </div>
-<<<<<<< Updated upstream
+	  {hasRole('SuperAdmin') && ( <><button type="button" className="btn btn-primary" style={{ fontSize: '1.1em', marginLeft: '0' }} onClick={() => navigate('/admin')}>Usuarios</button></> )}
       <ViewOptions viewOption={viewOption} onViewOptionChange={changeView} />
       <div className="container-card-profile">
         <CardsGuest user_id={user.id} />
       </div>
-    </div>
-=======
-	  {hasRole('SuperAdmin') && (
-                    <>      <button type="button" className="btn btn-primary" onClick={() => navigate('/admin')}>Usuarios</button>            </> 
-                    
-                    )}
-	  </div>
->>>>>>> Stashed changes
+    	  </div>
   );
 }
 
