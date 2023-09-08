@@ -7,6 +7,7 @@ import deleteIcon from '../assets/delete-icon.svg';
 import "../css/Details.css";
 import ModalAction from '../components/Modal';
 import { deleteTravel } from '../services/ApiDeleteTravel'; 
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Details() {
   const { id } = useParams();
@@ -15,6 +16,7 @@ export default function Details() {
   const [travels, setTravels] = useState([]);
   const [deleteId, setDeleteId] = useState(null); 
   const navigate = useNavigate();
+  const { user, hasRole} = useAuth();
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -58,6 +60,7 @@ export default function Details() {
           </div>
           <p className="travel-description">{details.description}</p>
         </div>
+        {(user && hasRole('Admin' || 'SuperAdmin')) || (user && user.id === details.user_id) ? (
         <div className="icon-container"> 
           <Link to={`/edit/${details.id}`}>
             <img className="icon-edit" src={editIcon} alt="icono editar" />
@@ -65,6 +68,7 @@ export default function Details() {
 
           <img className="icon-delete" src={deleteIcon} alt="icono borrar" onClick={handleDeleteClick} />
         </div>
+         ) : null}
       </div>
       <ModalAction
         isOpen={isModalOpen}

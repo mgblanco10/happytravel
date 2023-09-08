@@ -47,7 +47,7 @@ export default function CardsGuest({ user_id }) {
         {travels.map((travel) => (
           (!user_id || travel.user_id === user_id) ? (
             <div key={travel.id} className="cards" style={{ width: '18.75rem', height: '25rem' }}>
-              {(user && hasRole('Admin' && 'SuperAdmin'))  || (user && user.id === travel.user_id) ? (
+              {user  ? (
                 <Link to={`/details/${travel.id}`} className="card-link">
                   <img className="icon-info" src={infoIcon} alt="icono info" />
                 </Link>
@@ -59,7 +59,7 @@ export default function CardsGuest({ user_id }) {
                   <h5 className="card-title">{travel.name}</h5>
                   <p className="card-text">{travel.location}</p>
                 </div>
-                {(user && hasRole('Admin')) || (user && user.id === travel.user_id) ? (
+                {(user && hasRole('Admin' || 'SuperAdmin')) || (user && user.id === travel.user_id) ? (
                   <div>
                     <Link to={`/edit/${travel.id}`} className="card-edit">
                       <img className="icon-cards" src={editIcon} alt="icono de editar destino" />
