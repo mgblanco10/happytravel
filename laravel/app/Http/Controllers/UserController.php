@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Hash;
 
+
 class UserController extends Controller
 {
      public function __construct()
