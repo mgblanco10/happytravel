@@ -76,12 +76,16 @@ Para utilizar esta nueva versión del proyecto , sigue las instrucciones, para e
  `composer install`
  4. Crea un archivo .env a partir del archivo .env.example.
  5. Configura tu base de datos en el archivo .env con la información adecuada, donde debes poner el nombre de tu base de datos previamente creada en mysql y tener claro cual es tu sistema operativo para la instalación.Ejemplo:
- `DB_CONNECTION=mysql
+ <pre>
+<code>
+DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=nombre_base_de_datos
 DB_USERNAME=nombre_usuario
-DB_PASSWORD=contraseña`
+DB_PASSWORD=contraseña
+</code>
+</pre>
 6. Ejecuta las migraciones para crear las tablas de la base de datos
 `php artisan migrate`
   - Si deseas ya tener información en tu base de datos te recomendamos hacer uso de los seeders, para eso debes ejecutar el comando
